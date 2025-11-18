@@ -5,6 +5,29 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import MyPhoto from './assets/me.jpg';
+import emailjs from "emailjs-com";
+
+const sendEmail = (e) => {
+  e.preventDefault();
+
+  emailjs.sendForm(
+    "service_5y9i0vr",    // replace with your EmailJS Service ID
+    "template_94rfhyl",   // replace with your EmailJS Template ID
+    e.target,
+    "wOPsz7_5Cpo85PiiV"     // replace with your EmailJS Public Key
+  ).then(
+    (result) => {
+      alert("Message sent successfully!");
+    },
+    (error) => {
+      alert("Failed to send message, try again.");
+    }
+  );
+
+  e.target.reset();
+};
+
+
 
 const App = () => {
   const [isVisible, setIsVisible] = useState({});
@@ -84,6 +107,7 @@ const App = () => {
             <div className="flex flex-wrap gap-4">
               <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="#contact" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"><Mail className="w-5 h-5 mr-2" />Contact Me</motion.a>
               <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="https://github.com/pra7ik7" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors flex items-center"><Github className="w-5 h-5 mr-2" />GitHub</motion.a>
+              <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="https://www.linkedin.com/in/pratik-adhikari-54b8b6202/" target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors flex items-center"><Linkedin className="w-5 h-5 mr-2" />LinkedIn</motion.a>
             </div>
           </motion.div>
           <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }} className="relative">
@@ -200,7 +224,7 @@ const App = () => {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
             {hobbies.map((h, i) => (
               <motion.div key={i} variants={containerVariants} initial="hidden" animate={isVisible.hobbies ? "visible" : "hidden"} transition={{ delay: i * 0.1 }} whileHover={{ scale: 1.05, rotate: 2 }} className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-6 text-center text-white hover:bg-opacity-30 transition-all duration-300">
-                <div className="flex justify-center mb-3"><div className="p-3 bg-white bg-opacity-20 rounded-full">{h.icon}</div></div>
+              <div className="p-3 bg-white bg-opacity-30 rounded-full text-white flex items-center justify-center">{h.icon}</div>
                 <p className="font-medium text-sm">{h.name}</p>
               </motion.div>
             ))}
@@ -209,51 +233,91 @@ const App = () => {
       </section>
 
       {/* Contact Section */}
-      <section id="contact" className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div variants={containerVariants} initial="hidden" animate={isVisible.contact ? "visible" : "hidden"} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
-          </motion.div>
-          <motion.div variants={containerVariants} initial="hidden" animate={isVisible.contact ? "visible" : "hidden"} className="grid md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="text-xl font-semibold text-gray-800 mb-4">Contact Information</h3>
-              <div className="space-y-4">
-                <div className="flex items-start">
-                  <Mail className="w-5 h-5 text-blue-600 mt-1" />
-                  <p className="ml-3 text-sm text-gray-600">Email: pratikadhikari61@email.com</p>
-                </div>
-                <div className="flex items-start">
-                  <MapPin className="w-5 h-5 text-blue-600 mt-1" />
-                  <p className="ml-3 text-sm text-gray-600">Location: Lalitpur, Kathmandu, Nepal</p>
-                </div>
-                <div className="flex items-start">
-                  <Calendar className="w-5 h-5 text-blue-600 mt-1" />
-                  <p className="ml-3 text-sm text-gray-600">Availability: Any time, but with short message prior</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              {/* Contact form placeholder */}
-              <form className="space-y-4 bg-gray-50 p-6 rounded-xl shadow-md">
-                <div>
-                  <label className="block text-gray-700 text-sm font-medium mb-1">Name</label>
-                  <input type="text" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Name" />
-                </div>
-                <div>
-                  <label className="block text-gray-700 text-sm font-medium mb-1">Email</label>
-                  <input type="email" className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Your Email" />
-                </div>
-                <div>
-                  <label className="block text-gray-700 text-sm font-medium mb-1">Message</label>
-                  <textarea className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4" placeholder="Your Message"></textarea>
-                </div>
-                <button type="submit" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Send Message</button>
-              </form>
-            </div>
-          </motion.div>
+<section id="contact" className="py-16">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate={isVisible.contact ? "visible" : "hidden"}
+      className="text-center mb-12"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+      <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+    </motion.div>
+
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate={isVisible.contact ? "visible" : "hidden"}
+      className="grid md:grid-cols-2 gap-12"
+    >
+      {/* Contact Info */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">Contact Information</h3>
+        <div className="space-y-4">
+          <div className="flex items-start">
+            <Mail className="w-5 h-5 text-blue-600 mt-1" />
+            <p className="ml-3 text-sm text-gray-600">Email: pratikadhikari61@email.com</p>
+          </div>
+          <div className="flex items-start">
+            <MapPin className="w-5 h-5 text-blue-600 mt-1" />
+            <p className="ml-3 text-sm text-gray-600">Location: Lalitpur, Kathmandu, Nepal</p>
+          </div>
+          <div className="flex items-start">
+            <Calendar className="w-5 h-5 text-blue-600 mt-1" />
+            <p className="ml-3 text-sm text-gray-600">Availability: Any time, but with short message prior</p>
+          </div>
         </div>
-      </section>
+      </div>
+
+      {/* Contact Form */}
+      <div>
+        <form
+          onSubmit={sendEmail}
+          className="space-y-4 bg-gray-50 p-6 rounded-xl shadow-md"
+        >
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">Name</label>
+            <input
+              type="text"
+              name="from_name"
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Your Name"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">Email</label>
+            <input
+              type="email"
+              name="from_email"
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              placeholder="Your Email"
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 text-sm font-medium mb-1">Message</label>
+            <textarea
+              name="message"
+              required
+              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              rows="4"
+              placeholder="Your Message"
+            ></textarea>
+          </div>
+          <button
+            type="submit"
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            Send Message
+          </button>
+        </form>
+      </div>
+    </motion.div>
+  </div>
+</section>
+
 
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-12">
