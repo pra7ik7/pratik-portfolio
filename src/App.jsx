@@ -6,6 +6,7 @@ import {
 import { motion } from "framer-motion";
 import MyPhoto from './assets/me.jpg';
 import emailjs from "emailjs-com";
+import { Sun, Moon } from "lucide-react";
 
 const sendEmail = (e) => {
   e.preventDefault();
@@ -30,27 +31,64 @@ const sendEmail = (e) => {
 
 
 const App = () => {
-  const [isVisible, setIsVisible] = useState({});
+// Replace your existing darkMode state + useEffect with this block:
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible(prev => ({
-            ...prev,
-            [entry.target.id]: entry.isIntersecting
-          }));
-        });
-      },
-      { threshold: 0.1 }
-    );
 
-    document.querySelectorAll("section[id]").forEach((section) => {
-      observer.observe(section);
-    });
+const [theme, setTheme] = useState(() => {
+  try {
+    const saved = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
+    if (saved === "dark" || saved === "light") return saved;
+    if (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+      return "dark";
+    }
+  } catch (e) {
+    // ignore localStorage errors
+  }
+  return "light";
+});
 
-    return () => observer.disconnect();
-  }, []);
+const toggleTheme = () => setTheme(prev => (prev === "dark" ? "light" : "dark"));
+
+useEffect(() => {
+  const html = document.documentElement;
+  const body = document.body;
+  if (theme === "dark") {
+    html.classList.add("dark");
+    body.classList.add("dark");
+    html.setAttribute("data-theme", "dark");
+  } else {
+    html.classList.remove("dark");
+    body.classList.remove("dark");
+    html.setAttribute("data-theme", "light");
+  }
+  try {
+    localStorage.setItem("theme", theme);
+  } catch (e) {
+    // ignore
+  }
+}, [theme]);
+
+const [isVisible, setIsVisible] = useState({});
+
+useEffect(() => {
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        setIsVisible(prev => ({
+          ...prev,
+          [entry.target.id]: entry.isIntersecting
+        }));
+      });
+    },
+    { threshold: 0.1 }
+  );
+
+  document.querySelectorAll("section[id]").forEach((section) => {
+    observer.observe(section);
+  });
+
+  return () => observer.disconnect();
+}, []);
 
   const containerVariants = {
     hidden: { opacity: 0, y: 20 },
@@ -78,31 +116,63 @@ const App = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-linear-to-br from-slate-50 to-blue-50">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       {/* Navbar */}
-      <header className="bg-white shadow-sm sticky top-0 z-50">
+      <header className="bg-white dark:bg-gray-900 shadow-sm sticky top-0 z-50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5 }} className="text-2xl font-bold text-gray-800">Pratik Adhikari</motion.div>
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.2 }} className="hidden md:flex space-x-8">
-            <a href="#about" className="text-gray-600 hover:text-blue-600 transition-colors">About</a>
-            <a href="#skills" className="text-gray-600 hover:text-blue-600 transition-colors">Skills</a>
-            <a href="#projects" className="text-gray-600 hover:text-blue-600 transition-colors">Projects</a>
-            <a href="#hobbies" className="text-gray-600 hover:text-blue-600 transition-colors">Hobbies</a>
-            <a href="#contact" className="text-gray-600 hover:text-blue-600 transition-colors">Contact</a>
-          </motion.div>
-        </nav>
+  <motion.div
+    initial={{ opacity: 0, x: -20 }}
+    animate={{ opacity: 1, x: 0 }}
+    transition={{ duration: 0.5 }}
+    className="text-2xl font-bold text-gray-800 dark:text-white"
+  >
+    Pratik Adhikari
+  </motion.div>
+
+  <div className="flex items-center space-x-6">
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.5, delay: 0.2 }}
+      className="hidden md:flex space-x-8"
+    >
+      <a href="#about" className="text-gray-600 dark:text-gray-300 hover:text-blue-600">About</a>
+      <a href="#skills" className="text-gray-600 dark:text-gray-300 hover:text-blue-600">Skills</a>
+      <a href="#projects" className="text-gray-600 dark:text-gray-300 hover:text-blue-600">Projects</a>
+      <a href="#hobbies" className="text-gray-600 dark:text-gray-300 hover:text-blue-600">Hobbies</a>
+      <a href="#contact" className="text-gray-600 dark:text-gray-300 hover:text-blue-600">Contact</a>
+    </motion.div>
+
+    {/* 🌙 DARK MODE TOGGLE BUTTON */}
+   <button
+  onClick={toggleTheme}
+  aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+  title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+  className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 transition focus:outline-none focus:ring-2 focus:ring-blue-500"
+>
+  {theme === "dark" ? (
+    <Sun className="w-6 h-6 text-yellow-400" />
+  ) : (
+    <Moon className="w-6 h-6 text-gray-900 dark:text-white" />
+  )}
+</button>
+
+
+  </div>
+</nav>
+
       </header>
 
       {/* Hero Section */}
       <section id="hero" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 md:py-32">
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <motion.div initial={{ opacity: 0, x: -30 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.7 }}>
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-6">Pratik <span className="text-blue-600">Adhikari</span></h1>
-            <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed">Electrical Engineering student passionate about renewable energy, control systems, and modern technology.</p>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white mb-6">Pratik <span className="text-blue-600">Adhikari</span></h1>
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">Electrical Engineering student passionate about renewable energy, control systems, and modern technology.</p>
             <div className="flex flex-wrap gap-4 mb-8">
-              <div className="flex items-center text-gray-500"><MapPin className="w-5 h-5 mr-2" />Lalitpur, Kathmandu</div>
-              <div className="flex items-center text-gray-500"><Calendar className="w-5 h-5 mr-2" />4th Year Student</div>
-              <div className="flex items-center text-gray-500"><GraduationCap className="w-5 h-5 mr-2" />Pulchowk Engineering Campus</div>
+              <div className="flex items-center text-gray-500 dark:text-gray-400"><MapPin className="w-5 h-5 mr-2" />Lalitpur, Kathmandu</div>
+              <div className="flex items-center text-gray-500 dark:text-gray-400"><Calendar className="w-5 h-5 mr-2" />4th Year Student</div>
+              <div className="flex items-center text-gray-500 dark:text-gray-400"><GraduationCap className="w-5 h-5 mr-2" />Pulchowk Engineering Campus</div>
             </div>
             <div className="flex flex-wrap gap-4">
               <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="#contact" className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center"><Mail className="w-5 h-5 mr-2" />Contact Me</motion.a>
@@ -120,119 +190,221 @@ const App = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div variants={containerVariants} initial="hidden" animate={isVisible.about ? "visible" : "hidden"} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">About Me</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
-          </motion.div>
-          <motion.div variants={containerVariants} initial="hidden" animate={isVisible.about ? "visible" : "hidden"} className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                I am a passionate Electrical Engineering student with a strong interest in renewable energy systems, power electronics, and control systems. Currently in my final year at Pulchowk Engineering Campus, I'm constantly exploring new technologies and methodologies to solve real-world engineering challenges.
-              </p>
-              <p className="text-lg text-gray-600 mb-6 leading-relaxed">
-                My academic journey has equipped me with both theoretical knowledge and practical skills, allowing me to approach problems with a balanced perspective. I thrive in collaborative environments and enjoy taking on challenges that push my boundaries.
-              </p>
-              <div className="flex flex-wrap gap-4">
-                <div className="px-4 py-2 bg-blue-100 text-blue-600 rounded-lg">Renewable Energy</div>
-                <div className="px-4 py-2 bg-blue-100 text-blue-600 rounded-lg">Control Systems</div>
-                <div className="px-4 py-2 bg-blue-100 text-blue-600 rounded-lg">Power Electronics</div>
-              </div>
+{/* About Section */}
+<section id="about" className="py-16">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate={isVisible.about ? "visible" : "hidden"}
+      className="text-center mb-12"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        About Me
+      </h2>
+      <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+    </motion.div>
+
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate={isVisible.about ? "visible" : "hidden"}
+      className="grid md:grid-cols-2 gap-12 items-center"
+    >
+      <div>
+        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+          I am a passionate Electrical Engineering student with a strong interest in renewable energy systems, power electronics, and control systems. Currently in my final year at Pulchowk Engineering Campus, I'm constantly exploring new technologies and methodologies to solve real-world engineering challenges.
+        </p>
+        <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+          My academic journey has equipped me with both theoretical knowledge and practical skills, allowing me to approach problems with a balanced perspective. I thrive in collaborative environments and enjoy taking on challenges that push my boundaries.
+        </p>
+
+        <div className="flex flex-wrap gap-4">
+          <div className="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-lg">Renewable Energy</div>
+          <div className="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-lg">Control Systems</div>
+          <div className="px-4 py-2 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-lg">Power Electronics</div>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-4">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div className="text-blue-600 dark:text-blue-400 mb-2"><Cpu className="w-8 h-8" /></div>
+          <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-2">Technical Expertise</h3>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">Proficient in MATLAB, AutoCAD, and circuit simulation tools</p>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div className="text-blue-600 dark:text-blue-400 mb-2"><Zap className="w-8 h-8" /></div>
+          <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-2">Research Focus</h3>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">Special interest in sustainable energy solutions</p>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div className="text-blue-600 dark:text-blue-400 mb-2"><Users className="w-8 h-8" /></div>
+          <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-2">Team Player</h3>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">Strong collaboration and leadership skills</p>
+        </div>
+
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md">
+          <div className="text-blue-600 dark:text-blue-400 mb-2"><Book className="w-8 h-8" /></div>
+          <h3 className="font-bold text-gray-800 dark:text-gray-100 mb-2">Continuous Learner</h3>
+          <p className="text-gray-600 dark:text-gray-300 text-sm">Always expanding my knowledge base</p>
+        </div>
+      </div>
+    </motion.div>
+  </div>
+</section>
+
+
+{/* Skills Section */}
+<section id="skills" className="py-16 bg-gray-50 dark:bg-gray-900 rounded-2xl">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate={isVisible.skills ? "visible" : "hidden"}
+      className="text-center mb-12"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Skills & Expertise
+      </h2>
+      <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+    </motion.div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {skillCategories.map((category, i) => (
+        <motion.div
+          key={i}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isVisible.skills ? "visible" : "hidden"}
+          transition={{ delay: i * 0.2 }}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow"
+        >
+          <div className="flex items-center mb-6">
+            <div className="p-3 bg-blue-100 dark:bg-blue-900 rounded-lg text-blue-600 dark:text-blue-300 mr-4">
+              {category.icon}
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <div className="text-blue-600 mb-2"><Cpu className="w-8 h-8" /></div>
-                <h3 className="font-bold text-gray-800 mb-2">Technical Expertise</h3>
-                <p className="text-gray-600 text-sm">Proficient in MATLAB, AutoCAD, and circuit simulation tools</p>
-              </div>
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <div className="text-blue-600 mb-2"><Zap className="w-8 h-8" /></div>
-                <h3 className="font-bold text-gray-800 mb-2">Research Focus</h3>
-                <p className="text-gray-600 text-sm">Special interest in sustainable energy solutions</p>
-              </div>
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <div className="text-blue-600 mb-2"><Users className="w-8 h-8" /></div>
-                <h3 className="font-bold text-gray-800 mb-2">Team Player</h3>
-                <p className="text-gray-600 text-sm">Strong collaboration and leadership skills</p>
-              </div>
-              <div className="bg-white p-6 rounded-xl shadow-md">
-                <div className="text-blue-600 mb-2"><Book className="w-8 h-8" /></div>
-                <h3 className="font-bold text-gray-800 mb-2">Continuous Learner</h3>
-                <p className="text-gray-600 text-sm">Always expanding my knowledge base</p>
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+            <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
+              {category.title}
+            </h3>
+          </div>
 
-      {/* Skills Section */}
-      <section id="skills" className="py-16 bg-gray-50 rounded-2xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div variants={containerVariants} initial="hidden" animate={isVisible.skills ? "visible" : "hidden"} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Skills & Expertise</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
-          </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skillCategories.map((category, i) => (
-              <motion.div key={i} variants={containerVariants} initial="hidden" animate={isVisible.skills ? "visible" : "hidden"} transition={{ delay: i * 0.2 }} className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-shadow">
-                <div className="flex items-center mb-6">
-                  <div className="p-3 bg-blue-100 rounded-lg text-blue-600 mr-4">{category.icon}</div>
-                  <h3 className="text-xl font-semibold text-gray-900">{category.title}</h3>
-                </div>
-                <div className="grid grid-cols-2 gap-3">
-                  {category.skills.map((s, j) => <div key={j} className="px-4 py-2 bg-gray-100 rounded-lg text-gray-700 text-sm font-medium">{s}</div>)}
-                </div>
-              </motion.div>
+          <div className="grid grid-cols-2 gap-3">
+            {category.skills.map((s, j) => (
+              <div
+                key={j}
+                className="px-4 py-2 bg-gray-100 dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-200 text-sm font-medium"
+              >
+                {s}
+              </div>
             ))}
           </div>
-        </div>
-      </section>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
 
-      {/* Projects Section */}
-      <section id="projects" className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div variants={containerVariants} initial="hidden" animate={isVisible.projects ? "visible" : "hidden"} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Projects & Experience</h2>
-            <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
-          </motion.div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {projects.map((p, i) => (
-              <motion.div key={i} variants={containerVariants} initial="hidden" animate={isVisible.projects ? "visible" : "hidden"} transition={{ delay: i * 0.1 }} whileHover={{ y: -5 }} className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-all duration-300">
-                <h3 className="text-xl font-semibold text-gray-900 mb-3">{p.title}</h3>
-                <p className="text-gray-600 mb-4">{p.description}</p>
-                <div className="flex flex-wrap gap-2">{p.tags.map((t, j) => <span key={j} className="px-3 py-1 bg-blue-100 text-blue-600 rounded-full text-xs font-medium">{t}</span>)}</div>
-              </motion.div>
+
+{/* Projects Section */}
+<section id="projects" className="py-16">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate={isVisible.projects ? "visible" : "hidden"}
+      className="text-center mb-12"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Projects & Experience
+      </h2>
+      <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
+    </motion.div>
+
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {projects.map((p, i) => (
+        <motion.div
+          key={i}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isVisible.projects ? "visible" : "hidden"}
+          transition={{ delay: i * 0.1 }}
+          whileHover={{ y: -5 }}
+          className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300"
+        >
+          <h3 className="text-xl font-semibold text-gray-900 dark:text-white mb-3">
+            {p.title}
+          </h3>
+          <p className="text-gray-600 dark:text-gray-300 mb-4">{p.description}</p>
+
+          <div className="flex flex-wrap gap-2">
+            {p.tags.map((t, j) => (
+              <span
+                key={j}
+                className="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-600 dark:text-blue-300 rounded-full text-xs font-medium"
+              >
+                {t}
+              </span>
             ))}
           </div>
-          <div className="text-center mt-12">
-            <motion.a whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} href="#" className="px-6 py-3 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50 transition-colors inline-flex items-center">
-              <Book className="w-5 h-5 mr-2" />View All Projects
-            </motion.a>
-          </div>
-        </div>
-      </section>
+        </motion.div>
+      ))}
+    </div>
 
-      {/* Hobbies Section */}
-      <section id="hobbies" className="py-16 bg-linear-to-r from-blue-600 to-purple-600 rounded-2xl">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div variants={containerVariants} initial="hidden" animate={isVisible.hobbies ? "visible" : "hidden"} className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Hobbies & Interests</h2>
-            <div className="w-20 h-1 bg-white mx-auto"></div>
-          </motion.div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {hobbies.map((h, i) => (
-              <motion.div key={i} variants={containerVariants} initial="hidden" animate={isVisible.hobbies ? "visible" : "hidden"} transition={{ delay: i * 0.1 }} whileHover={{ scale: 1.05, rotate: 2 }} className="bg-white bg-opacity-20 backdrop-blur-sm rounded-xl p-6 text-center text-white hover:bg-opacity-30 transition-all duration-300">
-              <div className="p-3 bg-white bg-opacity-30 rounded-full text-white flex items-center justify-center">{h.icon}</div>
-                <p className="font-medium text-sm">{h.name}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+    <div className="text-center mt-12">
+      <motion.a
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        href="#"
+        className="px-6 py-3 border border-blue-600 text-blue-600 dark:text-blue-300 dark:border-blue-300 rounded-lg hover:bg-blue-50 dark:hover:bg-gray-800 transition-colors inline-flex items-center"
+      >
+        <Book className="w-5 h-5 mr-2" />
+        View All Projects
+      </motion.a>
+    </div>
+  </div>
+</section>
 
-      {/* Contact Section */}
+
+{/* Hobbies Section */}
+<section id="hobbies" className="py-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate={isVisible.hobbies ? "visible" : "hidden"}
+      className="text-center mb-12"
+    >
+      <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+        Hobbies & Interests
+      </h2>
+      <div className="w-20 h-1 bg-white mx-auto"></div>
+    </motion.div>
+
+    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+      {hobbies.map((h, i) => (
+        <motion.div
+          key={i}
+          variants={containerVariants}
+          initial="hidden"
+          animate={isVisible.hobbies ? "visible" : "hidden"}
+          transition={{ delay: i * 0.1 }}
+          whileHover={{ scale: 1.05, rotate: 2 }}
+          className="bg-white/20 backdrop-blur-sm rounded-xl p-6 text-center text-white hover:bg-white/30 transition-all duration-300"
+        >
+          <div className="p-3 bg-white/30 rounded-full text-white flex items-center justify-center">
+            {h.icon}
+          </div>
+          <p className="font-medium text-sm">{h.name}</p>
+        </motion.div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+{/* Contact Section */}
 <section id="contact" className="py-16">
   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <motion.div
@@ -241,7 +413,9 @@ const App = () => {
       animate={isVisible.contact ? "visible" : "hidden"}
       className="text-center mb-12"
     >
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+        Get In Touch
+      </h2>
       <div className="w-20 h-1 bg-blue-600 mx-auto"></div>
     </motion.div>
 
@@ -253,19 +427,30 @@ const App = () => {
     >
       {/* Contact Info */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-800 mb-4">Contact Information</h3>
+        <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100 mb-4">
+          Contact Information
+        </h3>
+
         <div className="space-y-4">
           <div className="flex items-start">
             <Mail className="w-5 h-5 text-blue-600 mt-1" />
-            <p className="ml-3 text-sm text-gray-600">Email: pratikadhikari61@email.com</p>
+            <p className="ml-3 text-sm text-gray-600 dark:text-gray-300">
+              Email: pratikadhikari61@email.com
+            </p>
           </div>
+
           <div className="flex items-start">
             <MapPin className="w-5 h-5 text-blue-600 mt-1" />
-            <p className="ml-3 text-sm text-gray-600">Location: Lalitpur, Kathmandu, Nepal</p>
+            <p className="ml-3 text-sm text-gray-600 dark:text-gray-300">
+              Location: Lalitpur, Kathmandu, Nepal
+            </p>
           </div>
+
           <div className="flex items-start">
             <Calendar className="w-5 h-5 text-blue-600 mt-1" />
-            <p className="ml-3 text-sm text-gray-600">Availability: Any time, but with short message prior</p>
+            <p className="ml-3 text-sm text-gray-600 dark:text-gray-300">
+              Availability: Any time, but with short message prior
+            </p>
           </div>
         </div>
       </div>
@@ -274,38 +459,47 @@ const App = () => {
       <div>
         <form
           onSubmit={sendEmail}
-          className="space-y-4 bg-gray-50 p-6 rounded-xl shadow-md"
+          className="space-y-4 bg-gray-50 dark:bg-gray-800 p-6 rounded-xl shadow-md"
         >
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-1">Name</label>
+            <label className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-1">
+              Name
+            </label>
             <input
               type="text"
               name="from_name"
               required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Your Name"
             />
           </div>
+
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-1">Email</label>
+            <label className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-1">
+              Email
+            </label>
             <input
               type="email"
               name="from_email"
               required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="Your Email"
             />
           </div>
+
           <div>
-            <label className="block text-gray-700 text-sm font-medium mb-1">Message</label>
+            <label className="block text-gray-700 dark:text-gray-200 text-sm font-medium mb-1">
+              Message
+            </label>
             <textarea
               name="message"
               required
-              className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500"
               rows="4"
               placeholder="Your Message"
             ></textarea>
           </div>
+
           <button
             type="submit"
             className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
@@ -319,12 +513,13 @@ const App = () => {
 </section>
 
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p>&copy; {new Date().getFullYear()} Pratik Adhikari. All rights reserved.</p>
-        </div>
-      </footer>
+{/* Footer */}
+<footer className="bg-gray-900 text-white py-12">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <p>&copy; {new Date().getFullYear()} Pratik Adhikari. All rights reserved.</p>
+  </div>
+</footer>
+
     </div>
   );
 };

@@ -1,1 +1,9 @@
 @import "tailwindcss";
+
+/* Enable class-based dark mode for Tailwind CSS v4 */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Smooth scrolling for anchor links */
+html {
+  scroll-behavior: smooth;
+}
