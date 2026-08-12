@@ -77,7 +77,7 @@ const education = [
     subtitle: "Tribhuvan University, Lalitpur, Nepal",
     dates: "Apr 2022 – Jul 2026",
     details: [
-      "Aggregate: 84.72% — Distinction (institutional scale; 80%+ is the Distinction threshold).",
+      "Completed in Jul 2026 with an aggregate of 84.72% — Distinction (institutional scale; 80%+ is the Distinction threshold).",
       "Undergraduate thesis: Digital Twin for Real-Time Monitoring and Short-Term Forecasting of a Grid-Connected Photovoltaic System; advisor: Faculty Supervisor.",
       "Selected coursework: Power System Analysis I & II, Power Electronics, Control Systems, Switchgear & Protection, Instrumentation I & II, Power Plant Equipment, Utilization of Electrical Energy, Engineering Mathematics I–IV, Computer Programming.",
     ],
@@ -307,13 +307,13 @@ const App = () => {
               transition={{ duration: 0.5 }}
             >
               <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
-                Electrical Engineering Undergraduate
+                Electrical Engineering Graduate
               </p>
               <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white md:text-5xl">
                 Pratik Adhikari
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-                Final-year electrical engineering student focused on renewable-energy systems, power-system monitoring, digital twins, and data-driven forecasting for grid modernization.
+                Electrical engineer with a completed Bachelor's in Electrical Engineering, focused on renewable-energy systems, power-system monitoring, digital twins, and data-driven forecasting for grid modernization.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-300">
@@ -372,7 +372,7 @@ const App = () => {
                 className="space-y-5 text-base leading-8 text-slate-600 dark:text-slate-300"
               >
                 <p>
-                  I am a dedicated electrical engineering student with a strong foundation in renewable-energy systems, power electronics, control systems, and simulation-driven analysis. My work bridges theory and engineering practice, with a focus on building robust models and practical solutions for modern power systems.
+                  I am a dedicated electrical engineer with a strong foundation in renewable-energy systems, power electronics, control systems, and simulation-driven analysis. My work bridges theory and engineering practice, with a focus on building robust models and practical solutions for modern power systems.
                 </p>
                 <p>
                   Through research and project work, I have developed hands-on experience in MATLAB/Simulink modeling, digital twins, instrumentation, and time-series analysis. I enjoy solving complex engineering problems through rigorous analysis, collaborative work, and evidence-based design.
