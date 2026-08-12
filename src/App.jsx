@@ -326,7 +326,7 @@ const App = () => {
                 <a href="mailto:adhikaripratik2003@gmail.com" className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700">
                   <Mail className="h-4 w-4" /> Email Me
                 </a>
-                <a href="/pratik-adhikari-cv.txt" download className="inline-flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-5 py-3 text-sm font-medium text-blue-700 transition hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-300 dark:hover:bg-blue-900/30">
+                <a href="Pratik_Adhikari_CV.pdf" download="Pratik_Adhikari_CV.pdf" className="inline-flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-5 py-3 text-sm font-medium text-blue-700 transition hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-300 dark:hover:bg-blue-900/30">
                   <Download className="h-4 w-4" /> Download CV
                 </a>
                 <a href="https://www.linkedin.com/in/pratik-adhikari-54b8b6202/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-blue-500 hover:text-blue-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:text-blue-400">
