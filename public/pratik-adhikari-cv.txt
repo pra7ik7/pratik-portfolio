@@ -1,0 +1,64 @@
+Pratik Adhikari
+Lalitpur, Nepal
+adhikaripratik2003@gmail.com | +977-9824163232
+LinkedIn | GitHub | Portfolio
+
+Research Interests
+Renewable-energy integration, power-system monitoring and digital twins, and data-driven forecasting for grid modernization.
+
+Education
+Institute of Engineering, Pulchowk Campus | Apr 2022 – Jul 2026
+Bachelor of Engineering (BE), Electrical Engineering — Tribhuvan University, Lalitpur, Nepal
+• Aggregate: 84.72% — Distinction (institutional scale; 80%+ is the Distinction threshold).
+• Undergraduate thesis: Digital Twin for Real-Time Monitoring and Short-Term Forecasting of a Grid-Connected Photovoltaic System.
+• Selected coursework: Power System Analysis I & II, Power Electronics, Control Systems, Switchgear & Protection, Instrumentation I & II, Power Plant Equipment, Utilization of Electrical Energy, Engineering Mathematics I–IV, Computer Programming.
+
+SOS Hermann Gmeiner School, Gandaki | 2019 – 2021
+Higher Secondary (Grade 11–12), Science — GPA: 3.64 / 4.00
+
+Research Experience
+Deadbeat Predictive Current Control with SVPWM and LCL Filtering for Grid-Connected Voltage-Source Converters | 2026
+Department of Electrical Engineering, Pulchowk Campus
+• Developed and analyzed a deadbeat predictive current controller with space-vector PWM (SVPWM) for a three-phase grid-connected voltage-source converter, replacing single-vector FCS-MPC to achieve fixed 10 kHz switching operation.
+• Derived the continuous- and discrete-time dq-frame converter model and implemented a detuned deadbeat control law with capacitor-current-feedback active damping for an LCL-filtered grid interface.
+• Designed and evaluated a 5 kW, 400 V, 50 Hz grid-connected VSC in MATLAB/Simulink, including L/LCL filter comparison, resonance analysis, harmonic-spectrum evaluation, THD/TDD analysis, and P–Q dynamic response.
+• Demonstrated reduction in broadband current THD from 12.8% with baseline FCS-MPC + L filtering to 3.9% with the proposed deadbeat-SVPWM + LCL active-damping configuration under matched 10 kHz average switching frequency.
+• Investigated LCL resonance, digital-delay effects in capacitor-current active damping, and deadbeat-controller de-tuning as practical stability considerations in predictive current control.
+
+Digital Twin for Real-Time Monitoring & Short-Term Forecasting of a Grid-Connected PV System | 2025 – 2026
+Undergraduate thesis, Department of Electrical Engineering, Pulchowk Campus
+• Developed a physics-based MATLAB/Simulink digital twin of a grid-connected PV system (335 W module, boost converter, P&O MPPT, single-phase inverter) and validated it against field measurements, achieving R² = 0.918 on measured DC power.
+• Designed and calibrated a low-cost LDR-based pyranometer (R² = 0.974 against a reference instrument), reducing irradiance RMSE by roughly 3× relative to satellite-derived data for site-specific validation.
+• Built a SARIMA(1, 1, 1)(1, 1, 1)24 pipeline for day-ahead irradiance and temperature forecasting (R² = 0.921 and 0.964), producing end-to-end power forecasts within 0.5% daily energy error.
+• Coupled Arduino-based data acquisition to the Simulink model over serial communication, enabling live closed-loop digital-twin operation and real-time power prediction.
+• Characterised asymmetric error behaviour across irradiance bands, isolating low-irradiance bias as the dominant residual and identifying targeted sensor and model refinements.
+
+Professional Experience
+DeltaQ Engineering — Electrical Engineer (Remote, MEP) | May 2026 – Present
+California-based MEP engineering consultancy
+• Perform electrical load calculations and system analysis for residential, multi-family, and commercial buildings, and prepare design documentation to applicable US codes and standards (NEC).
+• Produce technical drawings, specifications, and coordination layouts in AutoCAD with senior engineers, and evaluate electrical equipment selections against project and code requirements.
+
+Technical Projects
+Smart Fertigation System | 2023
+• Built an Arduino-based monitoring and control system (DHT-11, soil moisture sensors) that automates irrigation with prototype fertilisation control to improve water and nutrient efficiency.
+
+Technical Skills
+Programming: C/C++, Python, MATLAB scripting
+Modelling & Simulation: MATLAB, Simulink, COMSOL Multiphysics, Proteus
+Power Systems: DIgSILENT PowerFactory (coursework), AutoCAD Electrical, PCB design, protection coordination fundamentals
+Data & Machine Learning: NumPy, Pandas, scikit-learn, statsmodels (SARIMA / time-series forecasting), Matplotlib
+Instrumentation: Arduino, sensor calibration, serial data acquisition, field measurement campaigns
+Other: LaTeX, Git, Bluebeam Revu
+
+Teaching, Mentoring & Outreach
+BloomED — STEM Content Creator (Volunteer) | Jun 2021 – Jan 2022
+• Produced simplified learning material explaining technical and scientific concepts for underprivileged students, developing science-communication and teaching skills.
+
+Professional Development
+• Supervised Machine Learning: Regression and Classification — DeepLearning.AI / Stanford, Coursera
+• Supervised Learning with scikit-learn and Intermediate Python — DataCamp
+• AutoCAD Electrical Essentials — SourceCAD
+
+Languages
+Nepali (native); English (professional working proficiency); Hindi (conversational)

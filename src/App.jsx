@@ -4,670 +4,724 @@ import {
   Linkedin,
   Mail,
   MapPin,
-  Calendar,
+  Phone,
   GraduationCap,
   Code,
   Cpu,
   Zap,
   Users,
-  Book,
-  Dumbbell,
-  Laptop,
   Sun,
   Moon,
-  ExternalLink,
-  Download,
-  Award,
   Briefcase,
-  ChevronRight,
-  Send,
   BrainCircuit,
   Settings,
-  Network
+  Network,
+  Award,
+  BookOpen,
+  TrendingUp,
+  CircuitBoard,
+  ArrowRight,
+  Menu,
+  X,
+  Download,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import MyPhoto from './assets/me.jpg';
-import emailjs from "emailjs-com";
 
-const sendEmail = (e) => {
-  e.preventDefault();
-  const submitBtn = e.target.querySelector('button[type="submit"]');
-  const originalText = submitBtn.innerHTML;
-  submitBtn.innerHTML = 'Sending...';
-  submitBtn.disabled = true;
+const skillCategories = [
+  {
+    title: "Programming",
+    icon: <Code className="w-6 h-6" />,
+    skills: ["C/C++", "Python", "MATLAB scripting", "LaTeX", "Git"],
+  },
+  {
+    title: "Modelling & Simulation",
+    icon: <CircuitBoard className="w-6 h-6" />,
+    skills: ["MATLAB", "Simulink", "COMSOL Multiphysics", "Proteus", "AutoCAD Electrical"],
+  },
+  {
+    title: "Power Systems & Control",
+    icon: <Zap className="w-6 h-6" />,
+    skills: ["Power System Analysis", "Power Electronics", "Control Systems", "Grid-connected PV", "Switchgear & Protection"],
+  },
+  {
+    title: "Data & Machine Learning",
+    icon: <TrendingUp className="w-6 h-6" />,
+    skills: ["NumPy", "Pandas", "scikit-learn", "statsmodels", "SARIMA", "Matplotlib"],
+  },
+  {
+    title: "Instrumentation & Hardware",
+    icon: <Cpu className="w-6 h-6" />,
+    skills: ["Arduino", "Sensor calibration", "Serial data acquisition", "Field measurements", "PCB design"],
+  },
+  {
+    title: "Professional & Research",
+    icon: <Users className="w-6 h-6" />,
+    skills: ["Technical communication", "Project coordination", "Analytical thinking", "Problem solving", "Documentation"],
+  },
+];
 
-  emailjs.sendForm(
-    "service_5y9i0vr",
-    "template_94rfhyl",
-    e.target,
-    "wOPsz7_5Cpo85PiiV"
-  ).then(
-    () => {
-      submitBtn.innerHTML = 'Message Sent!';
-      setTimeout(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      }, 2000);
-      e.target.reset();
-    },
-    () => {
-      submitBtn.innerHTML = 'Failed - Try Again';
-      setTimeout(() => {
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      }, 2000);
-    }
-  );
-};
+const researchInterests = [
+  "Renewable-energy integration",
+  "Power-system monitoring",
+  "Digital twins",
+  "Data-driven forecasting",
+  "Grid modernization",
+  "Power electronics and control",
+];
 
+const education = [
+  {
+    title: "Bachelor of Engineering (BE), Electrical Engineering",
+    institution: "Institute of Engineering, Pulchowk Campus",
+    subtitle: "Tribhuvan University, Lalitpur, Nepal",
+    dates: "Apr 2022 – Jul 2026",
+    details: [
+      "Aggregate: 84.72% — Distinction (institutional scale; 80%+ is the Distinction threshold).",
+      "Undergraduate thesis: Digital Twin for Real-Time Monitoring and Short-Term Forecasting of a Grid-Connected Photovoltaic System; advisor: Faculty Supervisor.",
+      "Selected coursework: Power System Analysis I & II, Power Electronics, Control Systems, Switchgear & Protection, Instrumentation I & II, Power Plant Equipment, Utilization of Electrical Energy, Engineering Mathematics I–IV, Computer Programming.",
+    ],
+  },
+  {
+    title: "Higher Secondary (Grade 11–12), Science",
+    institution: "SOS Hermann Gmeiner School, Gandaki",
+    subtitle: "GPA: 3.64 / 4.00",
+    dates: "2019 – 2021",
+    details: [],
+  },
+];
 
+const researchExperience = [
+  {
+    title: "Deadbeat Predictive Current Control with SVPWM and LCL Filtering for Grid-Connected Voltage-Source Converters",
+    institution: "Department of Electrical Engineering, Pulchowk Campus",
+    dates: "2026",
+    points: [
+      "Developed and analyzed a deadbeat predictive current controller with space-vector PWM (SVPWM) for a three-phase grid-connected voltage-source converter, replacing single-vector FCS-MPC to achieve fixed 10 kHz switching operation.",
+      "Derived the continuous- and discrete-time dq-frame converter model and implemented a detuned deadbeat control law with capacitor-current-feedback active damping for an LCL-filtered grid interface.",
+      "Designed and evaluated a 5 kW, 400 V, 50 Hz grid-connected VSC in MATLAB/Simulink, including L/LCL filter comparison, resonance analysis, harmonic-spectrum evaluation, THD/TDD analysis, and P–Q dynamic response.",
+      "Demonstrated reduction in broadband current THD from 12.8% with baseline FCS-MPC + L filtering to 3.9% with the proposed deadbeat-SVPWM + LCL active-damping configuration under matched 10 kHz average switching frequency.",
+      "Investigated LCL resonance, digital-delay effects in capacitor-current active damping, and deadbeat-controller de-tuning as practical stability considerations in predictive current control.",
+      "Methods and tools: MATLAB, Simulink, predictive control, dq-frame modeling, SVPWM, LCL filter design, active damping, harmonic analysis.",
+    ],
+  },
+  {
+    title: "Digital Twin for Real-Time Monitoring & Short-Term Forecasting of a Grid-Connected PV System",
+    institution: "Undergraduate thesis, Department of Electrical Engineering, Pulchowk Campus",
+    dates: "2025 – 2026",
+    points: [
+      "Developed a physics-based MATLAB/Simulink digital twin of a grid-connected PV system (335 W module, boost converter, P&O MPPT, single-phase inverter) and validated it against field measurements, achieving R² = 0.918 on measured DC power.",
+      "Designed and calibrated a low-cost LDR-based pyranometer (R² = 0.974 against a reference instrument), reducing irradiance RMSE by roughly 3× relative to satellite-derived data for site-specific validation.",
+      "Built a SARIMA(1, 1, 1)(1, 1, 1)24 pipeline for day-ahead irradiance and temperature forecasting (R² = 0.921 and 0.964), producing end-to-end power forecasts within 0.5% daily energy error.",
+      "Coupled Arduino-based data acquisition to the Simulink model over serial communication, enabling live closed-loop digital-twin operation and real-time power prediction.",
+      "Characterized asymmetric error behavior across irradiance bands, isolating low-irradiance bias as the dominant residual and identifying targeted sensor and model refinements.",
+      "Methods and tools: MATLAB, Simulink, Arduino, Python, SARIMA time-series modelling, sensor calibration, field measurement campaign.",
+    ],
+  },
+];
+
+const professionalExperience = [
+  {
+    title: "Electrical Engineer (Remote, MEP)",
+    institution: "DeltaQ Engineering",
+    dates: "May 2026 – Present",
+    points: [
+      "Perform electrical load calculations and system analysis for residential, multi-family, and commercial buildings, and prepare design documentation to applicable US codes and standards (NEC).",
+      "Produce technical drawings, specifications, and coordination layouts in AutoCAD with senior engineers, and evaluate electrical equipment selections against project and code requirements.",
+    ],
+  },
+];
+
+const initiatives = [
+  {
+    title: "Smart Fertigation System",
+    dates: "2023",
+    description: "Built an Arduino-based monitoring and control system (DHT-11, soil moisture sensors) that automates irrigation with prototype fertilisation control to improve water and nutrient efficiency.",
+  },
+];
+
+const extras = [
+  {
+    title: "Teaching, Mentoring & Outreach",
+    icon: <BookOpen className="w-5 h-5" />,
+    content: [
+      {
+        heading: "BloomED — STEM Content Creator (Volunteer)",
+        dates: "Jun 2021 – Jan 2022",
+        text: "Produced simplified learning material explaining technical and scientific concepts for underprivileged students, developing science-communication and teaching skills.",
+      },
+    ],
+  },
+  {
+    title: "Professional Development",
+    icon: <Award className="w-5 h-5" />,
+    content: [
+      "Supervised Machine Learning: Regression and Classification — DeepLearning.AI / Stanford, Coursera",
+      "Supervised Learning with scikit-learn and Intermediate Python — DataCamp",
+      "AutoCAD Electrical Essentials — SourceCAD",
+    ],
+  },
+  {
+    title: "Languages",
+    icon: <Users className="w-5 h-5" />,
+    content: [
+      "Nepali (native)",
+      "English (professional working proficiency)",
+      "Hindi (conversational)",
+    ],
+  },
+];
+
+const navItems = [
+  { label: "About", href: "#about" },
+  { label: "Education", href: "#education" },
+  { label: "Experience", href: "#experience" },
+  { label: "Projects", href: "#projects" },
+  { label: "Skills", href: "#skills" },
+  { label: "Contact", href: "#contact" },
+];
 
 const App = () => {
   const [theme, setTheme] = useState(() => {
-  try {
-    const saved = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-    if (saved === "dark" || saved === "light") return saved;
-    if (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
-      return "dark";
+    try {
+      const saved = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
+      if (saved === "dark" || saved === "light") return saved;
+      if (typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        return "dark";
+      }
+    } catch (error) {
+      // ignore localStorage errors
     }
-  } catch (e) {
-    // ignore localStorage errors
-  }
-  return "light";
-});
-
-const toggleTheme = () => setTheme(prev => (prev === "dark" ? "light" : "dark"));
-
-useEffect(() => {
-  const html = document.documentElement;
-  const body = document.body;
-  if (theme === "dark") {
-    html.classList.add("dark");
-    body.classList.add("dark");
-    html.setAttribute("data-theme", "dark");
-  } else {
-    html.classList.remove("dark");
-    body.classList.remove("dark");
-    html.setAttribute("data-theme", "light");
-  }
-  try {
-    localStorage.setItem("theme", theme);
-  } catch (e) {
-    // ignore
-  }
-}, [theme]);
-
-const [isVisible, setIsVisible] = useState({});
-
-useEffect(() => {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        setIsVisible(prev => ({
-          ...prev,
-          [entry.target.id]: entry.isIntersecting
-        }));
-      });
-    },
-    { threshold: 0.1 }
-  );
-
-  document.querySelectorAll("section[id]").forEach((section) => {
-    observer.observe(section);
+    return "light";
   });
 
-  return () => observer.disconnect();
-}, []);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  const toggleTheme = () => setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+
+  useEffect(() => {
+    const html = document.documentElement;
+    const body = document.body;
+    if (theme === "dark") {
+      html.classList.add("dark");
+      body.classList.add("dark");
+      html.setAttribute("data-theme", "dark");
+    } else {
+      html.classList.remove("dark");
+      body.classList.remove("dark");
+      html.setAttribute("data-theme", "light");
+    }
+
+    try {
+      localStorage.setItem("theme", theme);
+    } catch (error) {
+      // ignore
+    }
+  }, [theme]);
+
+  const [isVisible, setIsVisible] = useState({});
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible((prev) => ({
+            ...prev,
+            [entry.target.id]: entry.isIntersecting,
+          }));
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll("section[id]").forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
+    hidden: { opacity: 0, y: 18 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
-  const skillCategories = [
-    { 
-      title: "Technical Skills", 
-      icon: <Code className="w-6 h-6" />, 
-      skills: ["C/C++", "MATLAB/Simulink", "AutoCAD", "Proteus", "MS Office Suite", "Circuit Design"] 
-    },
-    { 
-      title: "Professional Skills", 
-      icon: <Users className="w-6 h-6" />, 
-      skills: ["Technical Communication", "Team Collaboration", "Project Leadership", "Analytical Thinking", "Time Management", "Adaptability"] 
-    },
-    { 
-      title: "Domain Expertise", 
-      icon: <Book className="w-6 h-6" />, 
-      skills: ["Power Systems", "Control Systems", "Renewable Energy", "Power Electronics", "Signal Processing", "Embedded Systems"] 
-    }
-  ];
-
-  const projects = [
-    { 
-      title: "Digital Twin Model of a Photovoltaic System", 
-      description: "Designed and implemented a comprehensive MATLAB/Simulink-based digital twin for a grid-connected PV system, enabling real-time performance analysis under varying irradiance and temperature conditions.", 
-      tags: ["Photovoltaic Systems", "Digital Twin", "MATLAB/Simulink", "Power Systems"],
-      status: "Ongoing"
-    },
-    { 
-      title: "Smart Fertigation System", 
-      description: "Engineered an automated irrigation and fertilization system utilizing Arduino microcontrollers and environmental sensors for precision agriculture applications.", 
-      tags: ["Arduino", "IoT", "Automation", "Embedded Systems"],
-      status: "Completed"
-    },
-  ];
-
-  const interests = [
-    { icon: <BrainCircuit className="w-6 h-6" />, name: "ML Applications" },
-    { icon: <Zap className="w-6 h-6" />, name: "Renewable Energy" },
-    { icon: <Settings className="w-6 h-6" />, name: "Control Systems" },
-    { icon: <Book className="w-6 h-6" />, name: "Research" },
-    { icon: <Network className="w-6 h-6" />, name: "Power Networks" }
-  ];
-
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-      {/* Navigation */}
-      <header className="bg-white/95 dark:bg-gray-900/95 backdrop-blur-md shadow-sm sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-xl font-semibold text-gray-800 dark:text-white tracking-tight"
-          >
+    <div className="min-h-screen bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-300">
+      <header className="sticky top-0 z-50 border-b border-slate-200 bg-white/90 backdrop-blur-md dark:border-slate-800 dark:bg-slate-950/90">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8">
+          <a href="#top" className="text-lg font-semibold tracking-tight text-slate-900 dark:text-white">
             Pratik Adhikari
-          </motion.div>
+          </a>
 
-          <div className="flex items-center space-x-6">
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="hidden md:flex space-x-8"
-            >
-              <a href="#about" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-sm font-medium">About</a>
-              <a href="#skills" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-sm font-medium">Skills</a>
-              <a href="#projects" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-sm font-medium">Projects</a>
-              <a href="#interests" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-sm font-medium">Interests</a>
-              <a href="#contact" className="text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-sm font-medium">Contact</a>
-            </motion.div>
+          <div className="hidden items-center gap-6 md:flex">
+            {navItems.map((item) => (
+              <a key={item.label} href={item.href} className="text-sm font-medium text-slate-600 transition hover:text-blue-600 dark:text-slate-300 dark:hover:text-blue-400">{item.label}</a>
+            ))}
+          </div>
 
+          <div className="flex items-center gap-2">
             <button
+              type="button"
               onClick={toggleTheme}
               aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-slate-700 transition hover:bg-slate-200 dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
             >
-              {theme === "dark" ? (
-                <Sun className="w-5 h-5 text-yellow-500" />
-              ) : (
-                <Moon className="w-5 h-5 text-gray-600" />
-              )}
+              {theme === "dark" ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-slate-700" />}
+            </button>
+            <button
+              type="button"
+              onClick={() => setMobileMenuOpen((prev) => !prev)}
+              aria-label="Toggle menu"
+              className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-100 text-slate-700 transition hover:bg-slate-200 md:hidden dark:border-slate-700 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
+            >
+              {mobileMenuOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
             </button>
           </div>
         </nav>
+
+        {mobileMenuOpen && (
+          <div className="border-t border-slate-200 bg-white px-4 py-4 md:hidden dark:border-slate-800 dark:bg-slate-950">
+            <div className="flex flex-col gap-3">
+              {navItems.map((item) => (
+                <a
+                  key={item.label}
+                  href={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="rounded-lg px-3 py-2 text-sm font-medium text-slate-700 transition hover:bg-slate-100 hover:text-blue-600 dark:text-slate-200 dark:hover:bg-slate-800 dark:hover:text-blue-400"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
       </header>
 
-      {/* Hero Section */}
-      <section id="hero" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-        <div className="grid md:grid-cols-2 gap-12 items-center">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
-            animate={{ opacity: 1, y: 0 }} 
-            transition={{ duration: 0.6, ease: "easeOut" }}
-          >
-            <p className="text-blue-600 dark:text-blue-400 font-medium mb-2 text-sm tracking-wide uppercase">Electrical Engineering Student</p>
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
-              Pratik Adhikari
-            </h1>
-            <p className="text-lg text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-              Final-year Electrical Engineering student at Pulchowk Engineering Campus, specializing in renewable energy systems, power electronics, and control systems, with strong interest in simulation-based analysis and practical engineering applications.
+      <main>
+        <section id="top" className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.4fr_0.8fr]">
+            <motion.div
+              initial={{ opacity: 0, y: 24 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
+                Electrical Engineering Undergraduate
+              </p>
+              <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white md:text-5xl">
+                Pratik Adhikari
+              </h1>
+              <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
+                Final-year electrical engineering student focused on renewable-energy systems, power-system monitoring, digital twins, and data-driven forecasting for grid modernization.
+              </p>
 
-            </p>
-            
-            <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-8 text-sm">
-              <div className="flex items-center text-gray-600 dark:text-gray-400">
-                <MapPin className="w-4 h-4 mr-2 text-blue-600" />Lalitpur, Nepal
+              <div className="mt-8 flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-300">
+                <div className="flex items-center gap-2"><MapPin className="h-4 w-4 text-blue-600 dark:text-blue-400" /> Lalitpur, Nepal</div>
+                <div className="flex items-center gap-2"><GraduationCap className="h-4 w-4 text-blue-600 dark:text-blue-400" /> IOE, Pulchowk Campus</div>
+                <div className="flex items-center gap-2"><Briefcase className="h-4 w-4 text-blue-600 dark:text-blue-400" /> Available for opportunities</div>
               </div>
-              <div className="flex items-center text-gray-600 dark:text-gray-400">
-                <GraduationCap className="w-4 h-4 mr-2 text-blue-600" />IOE Pulchowk Campus
+
+              <div className="mt-8 flex flex-wrap gap-3">
+                <a href="mailto:adhikaripratik2003@gmail.com" className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700">
+                  <Mail className="h-4 w-4" /> Email Me
+                </a>
+                <a href="/pratik-adhikari-cv.txt" download className="inline-flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-5 py-3 text-sm font-medium text-blue-700 transition hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-300 dark:hover:bg-blue-900/30">
+                  <Download className="h-4 w-4" /> Download CV
+                </a>
+                <a href="https://www.linkedin.com/in/pratik-adhikari-54b8b6202/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-blue-500 hover:text-blue-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:text-blue-400">
+                  <Linkedin className="h-4 w-4" /> LinkedIn
+                </a>
+                <a href="https://github.com/pra7ik7" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white">
+                  <Github className="h-4 w-4" /> GitHub
+                </a>
               </div>
-              <div className="flex items-center text-gray-600 dark:text-gray-400">
-                <Briefcase className="w-4 h-4 mr-2 text-blue-600" />Available for Opportunities
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="relative mx-auto w-full max-w-md"
+            >
+              <div className="absolute inset-3 rounded-2xl bg-gradient-to-br from-blue-100 to-indigo-200 opacity-70 blur-2xl dark:from-blue-900/40 dark:to-indigo-900/40" />
+              <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-3 shadow-xl dark:border-slate-700 dark:bg-slate-900">
+                <img src={MyPhoto} alt="Pratik Adhikari" className="h-[440px] w-full rounded-xl object-cover" />
               </div>
-            </div>
-            
-            <div className="flex flex-wrap gap-3">
-              <motion.a 
-                whileHover={{ scale: 1.02 }} 
-                whileTap={{ scale: 0.98 }} 
-                href="#contact" 
-                className="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-all duration-200 flex items-center text-sm font-medium shadow-sm"
-              >
-                <Mail className="w-4 h-4 mr-2" />Get in Touch
-              </motion.a>
-              <motion.a 
-                whileHover={{ scale: 1.02 }} 
-                whileTap={{ scale: 0.98 }} 
-                href="https://github.com/pra7ik7" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="px-5 py-2.5 bg-gray-900 dark:bg-gray-700 text-white rounded-lg hover:bg-gray-800 dark:hover:bg-gray-600 transition-all duration-200 flex items-center text-sm font-medium"
-              >
-                <Github className="w-4 h-4 mr-2" />GitHub
-              </motion.a>
-              <motion.a 
-                whileHover={{ scale: 1.02 }} 
-                whileTap={{ scale: 0.98 }} 
-                href="https://www.linkedin.com/in/pratik-adhikari-54b8b6202/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="px-5 py-2.5 border border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-all duration-200 flex items-center text-sm font-medium"
-              >
-                <Linkedin className="w-4 h-4 mr-2" />LinkedIn
-              </motion.a>
-            </div>
-          </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }} 
-            animate={{ opacity: 1, scale: 1 }} 
-            transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }} 
-            className="relative flex justify-center md:justify-end"
-          >
-            <div className="relative w-64 md:w-72 lg:w-80">
-              {/* Subtle decorative accent */}
-              <div className="absolute -inset-1 bg-linear-to-br from-blue-500 to-blue-600 rounded-2xl opacity-10"></div>
-              {/* Image container */}
-              <div className="relative rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
-                <img src={MyPhoto} alt="Pratik Adhikari" className="w-full aspect-[3/4] object-cover" />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-{/* About Section */}
-<section id="about" className="py-20 bg-gray-50 dark:bg-gray-800/50">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate={isVisible.about ? "visible" : "hidden"}
-      className="text-center mb-12"
-    >
-      <p className="text-blue-600 dark:text-blue-400 font-medium text-sm tracking-wide uppercase mb-2">Background</p>
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        About Me
-      </h2>
-      <div className="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
-    </motion.div>
-
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate={isVisible.about ? "visible" : "hidden"}
-      className="grid md:grid-cols-2 gap-12 items-center"
-    >
-      <div>
-        <p className="text-gray-600 dark:text-gray-300 mb-5 leading-relaxed">
-          I am a dedicated Electrical Engineering student with a strong foundation in renewable energy systems, power electronics, and control systems. Currently in my final year at Pulchowk Engineering Campus (Institute of Engineering, Tribhuvan University), I am focused on developing practical solutions to real-world engineering challenges.
-        </p>
-        <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-          My academic journey has provided me with both theoretical knowledge and hands-on experience, enabling me to approach complex problems with analytical rigor. I excel in collaborative environments and am driven by challenges that expand my technical capabilities.
-        </p>
-
-        <div className="flex flex-wrap gap-2">
-          <span className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium">Renewable Energy</span>
-          <span className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium">Machine Learning</span>
-          <span className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium">Power Electronics</span>
-          <span className="px-3 py-1.5 bg-blue-100 dark:bg-blue-900/50 text-blue-700 dark:text-blue-300 rounded-lg text-sm font-medium">Control Systems</span>
-        </div>
-      </div>
-
-      <div className="grid grid-cols-2 gap-4">
-        <div className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-200">
-          <div className="text-blue-600 dark:text-blue-400 mb-3"><Cpu className="w-7 h-7" /></div>
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1 text-sm">Technical Expertise</h3>
-          <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">MATLAB/Simulink, AutoCAD, circuit simulation</p>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-200">
-          <div className="text-blue-600 dark:text-blue-400 mb-3"><Zap className="w-7 h-7" /></div>
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1 text-sm">Research Focus</h3>
-          <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">Sustainable energy solutions & digital twins</p>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-200">
-          <div className="text-blue-600 dark:text-blue-400 mb-3"><Users className="w-7 h-7" /></div>
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1 text-sm">Collaboration</h3>
-          <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">Strong teamwork and leadership abilities</p>
-        </div>
-
-        <div className="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 hover:shadow-md transition-shadow duration-200">
-          <div className="text-blue-600 dark:text-blue-400 mb-3"><Book className="w-7 h-7" /></div>
-          <h3 className="font-semibold text-gray-800 dark:text-gray-100 mb-1 text-sm">Continuous Learning</h3>
-          <p className="text-gray-500 dark:text-gray-400 text-xs leading-relaxed">Committed to professional development</p>
-        </div>
-      </div>
-    </motion.div>
-  </div>
-</section>
-
-
-{/* Skills Section */}
-<section id="skills" className="py-20">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate={isVisible.skills ? "visible" : "hidden"}
-      className="text-center mb-12"
-    >
-      <p className="text-blue-600 dark:text-blue-400 font-medium text-sm tracking-wide uppercase mb-2">Capabilities</p>
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        Skills & Expertise
-      </h2>
-      <div className="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
-    </motion.div>
-
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {skillCategories.map((category, i) => (
-        <motion.div
-          key={i}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isVisible.skills ? "visible" : "hidden"}
-          transition={{ delay: i * 0.15 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-200"
-        >
-          <div className="flex items-center mb-5">
-            <div className="p-2.5 bg-blue-100 dark:bg-blue-900/50 rounded-lg text-blue-600 dark:text-blue-400 mr-3">
-              {category.icon}
-            </div>
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              {category.title}
-            </h3>
+            </motion.div>
           </div>
+        </section>
 
-          <div className="flex flex-wrap gap-2">
-            {category.skills.map((s, j) => (
-              <span
-                key={j}
-                className="px-3 py-1.5 bg-gray-100 dark:bg-gray-700 rounded-lg text-gray-700 dark:text-gray-300 text-xs font-medium"
+        <section id="about" className="border-y border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/70">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate={isVisible.about ? "visible" : "hidden"}
+              className="mb-10 text-center"
+            >
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">Profile</p>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">About Me</h2>
+            </motion.div>
+
+            <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr]">
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate={isVisible.about ? "visible" : "hidden"}
+                className="space-y-5 text-base leading-8 text-slate-600 dark:text-slate-300"
               >
-                {s}
-              </span>
+                <p>
+                  I am a dedicated electrical engineering student with a strong foundation in renewable-energy systems, power electronics, control systems, and simulation-driven analysis. My work bridges theory and engineering practice, with a focus on building robust models and practical solutions for modern power systems.
+                </p>
+                <p>
+                  Through research and project work, I have developed hands-on experience in MATLAB/Simulink modeling, digital twins, instrumentation, and time-series analysis. I enjoy solving complex engineering problems through rigorous analysis, collaborative work, and evidence-based design.
+                </p>
+                <div className="flex flex-wrap gap-2 pt-2">
+                  {researchInterests.map((interest) => (
+                    <span key={interest} className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-medium text-blue-700 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-300">
+                      {interest}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+
+              <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate={isVisible.about ? "visible" : "hidden"}
+                className="grid gap-4 sm:grid-cols-2"
+              >
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
+                  <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Cpu className="h-5 w-5" /></div>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Research Focus</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Renewable energy integration, digital twins, and forecasting for grid modernization.</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
+                  <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Settings className="h-5 w-5" /></div>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Technical Profile</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">MATLAB/Simulink, power electronics, instrumentation, field measurements, and control design.</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
+                  <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Network className="h-5 w-5" /></div>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Systems Thinking</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Interest in grid-connected systems, power quality, and monitoring of dynamic electrical infrastructure.</p>
+                </div>
+                <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
+                  <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><BrainCircuit className="h-5 w-5" /></div>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Data-Driven mindset</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Applying forecasting and machine learning for resilient, smarter energy systems and monitoring.</p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        <section id="education" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isVisible.education ? "visible" : "hidden"}
+            className="mb-10 text-center"
+          >
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">Academic Background</p>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">Education</h2>
+          </motion.div>
+
+          <div className="space-y-6">
+            {education.map((item) => (
+              <motion.article
+                key={item.title}
+                variants={containerVariants}
+                initial="hidden"
+                animate={isVisible.education ? "visible" : "hidden"}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+              >
+                <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                  <div>
+                    <div className="mb-2 flex items-center gap-2 text-blue-600 dark:text-blue-400">
+                      <GraduationCap className="h-4 w-4" />
+                      <span className="text-sm font-semibold uppercase tracking-[0.15em]">Education</span>
+                    </div>
+                    <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                    <p className="mt-2 text-base font-medium text-slate-700 dark:text-slate-200">{item.institution}</p>
+                    <p className="text-sm text-slate-500 dark:text-slate-400">{item.subtitle}</p>
+                  </div>
+                  <span className="inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600 dark:bg-slate-800 dark:text-slate-300">{item.dates}</span>
+                </div>
+
+                {item.details.length > 0 && (
+                  <ul className="mt-5 space-y-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                    {item.details.map((detail) => (
+                      <li key={detail} className="flex gap-3">
+                        <span className="mt-2 h-2 w-2 rounded-full bg-blue-500" />
+                        <span>{detail}</span>
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </motion.article>
             ))}
           </div>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
+        </section>
 
+        <section id="experience" className="border-y border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/70">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate={isVisible.experience ? "visible" : "hidden"}
+              className="mb-10 text-center"
+            >
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">Experience</p>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">Research & Professional Experience</h2>
+            </motion.div>
 
-{/* Projects Section */}
-<section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800/50">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate={isVisible.projects ? "visible" : "hidden"}
-      className="text-center mb-12"
-    >
-      <p className="text-blue-600 dark:text-blue-400 font-medium text-sm tracking-wide uppercase mb-2">Portfolio</p>
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        Projects
-      </h2>
-      <div className="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
-    </motion.div>
+            <div className="space-y-8">
+              {researchExperience.map((item) => (
+                <motion.article
+                  key={item.title}
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate={isVisible.experience ? "visible" : "hidden"}
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-950"
+                >
+                  <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <div className="mb-2 flex items-center gap-2 text-blue-600 dark:text-blue-400">
+                        <BookOpen className="h-4 w-4" />
+                        <span className="text-sm font-semibold uppercase tracking-[0.15em]">Research</span>
+                      </div>
+                      <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                      <p className="mt-2 text-base font-medium text-slate-700 dark:text-slate-200">{item.institution}</p>
+                    </div>
+                    <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-300">{item.dates}</span>
+                  </div>
 
-    <div className="grid md:grid-cols-2 gap-6">
-      {projects.map((p, i) => (
-        <motion.div
-          key={i}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isVisible.projects ? "visible" : "hidden"}
-          transition={{ delay: i * 0.1 }}
-          whileHover={{ y: -3 }}
-          className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 p-6 hover:shadow-md transition-all duration-200"
-        >
-          <div className="flex items-start justify-between mb-3">
-            <h3 className="text-lg font-semibold text-gray-900 dark:text-white pr-4">
-              {p.title}
-            </h3>
-            <span className={`px-2.5 py-1 rounded-full text-xs font-medium whitespace-nowrap ${
-              p.status === 'Completed' 
-                ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400' 
-                : 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400'
-            }`}>
-              {p.status}
-            </span>
+                  <ul className="space-y-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                    {item.points.map((point) => (
+                      <li key={point} className="flex gap-3">
+                        <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-blue-500" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.article>
+              ))}
+
+              {professionalExperience.map((item) => (
+                <motion.article
+                  key={item.title}
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate={isVisible.experience ? "visible" : "hidden"}
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-950"
+                >
+                  <div className="mb-4 flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+                    <div>
+                      <div className="mb-2 flex items-center gap-2 text-blue-600 dark:text-blue-400">
+                        <Briefcase className="h-4 w-4" />
+                        <span className="text-sm font-semibold uppercase tracking-[0.15em]">Professional</span>
+                      </div>
+                      <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                      <p className="mt-2 text-base font-medium text-slate-700 dark:text-slate-200">{item.institution}</p>
+                    </div>
+                    <span className="inline-flex rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700 dark:bg-green-900/30 dark:text-green-300">{item.dates}</span>
+                  </div>
+
+                  <ul className="space-y-3 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                    {item.points.map((point) => (
+                      <li key={point} className="flex gap-3">
+                        <span className="mt-2 h-2.5 w-2.5 shrink-0 rounded-full bg-green-500" />
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </motion.article>
+              ))}
+            </div>
           </div>
-          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">{p.description}</p>
+        </section>
 
-          <div className="flex flex-wrap gap-2">
-            {p.tags.map((t, j) => (
-              <span
-                key={j}
-                className="px-2.5 py-1 bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-md text-xs font-medium"
+        <section id="projects" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isVisible.projects ? "visible" : "hidden"}
+            className="mb-10 text-center"
+          >
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">Selected Work</p>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">Technical Projects</h2>
+          </motion.div>
+
+          <div className="grid gap-6 lg:grid-cols-2">
+            {initiatives.map((item) => (
+              <motion.article
+                key={item.title}
+                variants={containerVariants}
+                initial="hidden"
+                animate={isVisible.projects ? "visible" : "hidden"}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900"
               >
-                {t}
-              </span>
+                <div className="flex items-start justify-between gap-4">
+                  <div>
+                    <h3 className="text-xl font-semibold text-slate-900 dark:text-white">{item.title}</h3>
+                    <p className="mt-2 text-sm font-medium text-blue-600 dark:text-blue-400">{item.dates}</p>
+                  </div>
+                  <span className="inline-flex rounded-full bg-amber-100 px-2.5 py-1 text-xs font-medium text-amber-700 dark:bg-amber-900/30 dark:text-amber-300">Prototype</span>
+                </div>
+                <p className="mt-5 text-sm leading-7 text-slate-600 dark:text-slate-300">{item.description}</p>
+              </motion.article>
             ))}
           </div>
-        </motion.div>
-      ))}
-    </div>
+        </section>
 
-    <div className="text-center mt-10">
-      <motion.a
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-        href="https://github.com/pra7ik7"
-        target="_blank"
-        rel="noopener noreferrer"
-        className="px-5 py-2.5 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 inline-flex items-center text-sm font-medium"
-      >
-        <ExternalLink className="w-4 h-4 mr-2" />
-        View More on GitHub
-      </motion.a>
-    </div>
-  </div>
-</section>
+        <section id="skills" className="border-y border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/70">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate={isVisible.skills ? "visible" : "hidden"}
+              className="mb-10 text-center"
+            >
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">Capabilities</p>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">Skills & Tools</h2>
+            </motion.div>
 
-
-{/* Professional Interests Section */}
-<section id="interests" className="py-20">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate={isVisible.interests ? "visible" : "hidden"}
-      className="text-center mb-12"
-    >
-      <p className="text-blue-600 dark:text-blue-400 font-medium text-sm tracking-wide uppercase mb-2">Focus Areas</p>
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        Professional Interests
-      </h2>
-      <div className="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
-    </motion.div>
-
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
-      {interests.map((item, i) => (
-        <motion.div
-          key={i}
-          variants={containerVariants}
-          initial="hidden"
-          animate={isVisible.interests ? "visible" : "hidden"}
-          transition={{ delay: i * 0.1 }}
-          whileHover={{ y: -3 }}
-          className="bg-white dark:bg-gray-800 rounded-xl p-5 text-center border border-gray-100 dark:border-gray-700 hover:shadow-md hover:border-blue-200 dark:hover:border-blue-800 transition-all duration-200"
-        >
-          <div className="w-12 h-12 mx-auto mb-3 bg-blue-100 dark:bg-blue-900/50 rounded-xl flex items-center justify-center text-blue-600 dark:text-blue-400">
-            {item.icon}
-          </div>
-          <p className="font-medium text-sm text-gray-800 dark:text-gray-200">{item.name}</p>
-        </motion.div>
-      ))}
-    </div>
-  </div>
-</section>
-
-
-{/* Contact Section */}
-<section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800/50">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate={isVisible.contact ? "visible" : "hidden"}
-      className="text-center mb-12"
-    >
-      <p className="text-blue-600 dark:text-blue-400 font-medium text-sm tracking-wide uppercase mb-2">Connect</p>
-      <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-        Get In Touch
-      </h2>
-      <div className="w-16 h-1 bg-blue-600 mx-auto rounded-full"></div>
-      <p className="text-gray-600 dark:text-gray-400 mt-4 max-w-2xl mx-auto">
-        I'm always open to discussing new opportunities, collaborations, or answering questions about my work.
-      </p>
-    </motion.div>
-
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate={isVisible.contact ? "visible" : "hidden"}
-      className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto"
-    >
-      {/* Contact Info */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5">
-          Contact Information
-        </h3>
-
-        <div className="space-y-4">
-          <a href="mailto:pratikadhikari61@gmail.com" className="flex items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors group">
-            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
-              <Mail className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            </div>
-            <div className="ml-4">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Email</p>
-              <p className="text-sm text-gray-800 dark:text-gray-200 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">pratikadhikari61@gmail.com</p>
-            </div>
-          </a>
-
-          <div className="flex items-center p-3 rounded-lg">
-            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
-              <MapPin className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            </div>
-            <div className="ml-4">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Location</p>
-              <p className="text-sm text-gray-800 dark:text-gray-200">Lalitpur, Nepal</p>
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {skillCategories.map((category, index) => (
+                <motion.div
+                  key={category.title}
+                  variants={containerVariants}
+                  initial="hidden"
+                  animate={isVisible.skills ? "visible" : "hidden"}
+                  transition={{ delay: index * 0.08 }}
+                  className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-950"
+                >
+                  <div className="mb-5 flex items-center gap-3">
+                    <div className="inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400">{category.icon}</div>
+                    <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{category.title}</h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {category.skills.map((skill) => (
+                      <span key={skill} className="rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-700 dark:bg-slate-800 dark:text-slate-200">
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </div>
+        </section>
 
-          <div className="flex items-center p-3 rounded-lg">
-            <div className="w-10 h-10 bg-blue-100 dark:bg-blue-900/50 rounded-lg flex items-center justify-center">
-              <Calendar className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            </div>
-            <div className="ml-4">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Availability</p>
-              <p className="text-sm text-gray-800 dark:text-gray-200">Open to opportunities</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="mt-6 pt-5 border-t border-gray-100 dark:border-gray-700">
-          <p className="text-xs text-gray-500 dark:text-gray-400 mb-3">Connect on social</p>
-          <div className="flex gap-3">
-            <a href="https://github.com/pra7ik7" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-600 hover:text-gray-800 dark:hover:text-gray-200 transition-colors">
-              <Github className="w-5 h-5" />
-            </a>
-            <a href="https://www.linkedin.com/in/pratik-adhikari-54b8b6202/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center text-gray-600 dark:text-gray-400 hover:bg-blue-100 dark:hover:bg-blue-900 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
-              <Linkedin className="w-5 h-5" />
-            </a>
-          </div>
-        </div>
-      </div>
-
-      {/* Contact Form */}
-      <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-100 dark:border-gray-700">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-100 mb-5">
-          Send a Message
-        </h3>
-        <form onSubmit={sendEmail} className="space-y-4">
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 text-xs font-medium mb-1.5">
-              Your Name
-            </label>
-            <input
-              type="text"
-              name="from_name"
-              required
-              className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              placeholder="John Doe"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 text-xs font-medium mb-1.5">
-              Your Email
-            </label>
-            <input
-              type="email"
-              name="from_email"
-              required
-              className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-              placeholder="john@example.com"
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 dark:text-gray-300 text-xs font-medium mb-1.5">
-              Message
-            </label>
-            <textarea
-              name="message"
-              required
-              className="w-full px-4 py-2.5 border border-gray-200 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-none"
-              rows="4"
-              placeholder="Your message here..."
-            ></textarea>
-          </div>
-
-          <button
-            type="submit"
-            className="w-full px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 flex items-center justify-center text-sm font-medium"
+        <section id="additional" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            animate={isVisible.additional ? "visible" : "hidden"}
+            className="mb-10 text-center"
           >
-            <Send className="w-4 h-4 mr-2" />
-            Send Message
-          </button>
-        </form>
-      </div>
-    </motion.div>
-  </div>
-</section>
+            <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">Additional</p>
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">Development & Engagement</h2>
+          </motion.div>
 
+          <div className="grid gap-6 lg:grid-cols-3">
+            {extras.map((section) => (
+              <motion.div
+                key={section.title}
+                variants={containerVariants}
+                initial="hidden"
+                animate={isVisible.additional ? "visible" : "hidden"}
+                className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-900"
+              >
+                <div className="mb-5 flex items-center gap-3">
+                  <div className="inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400">{section.icon}</div>
+                  <h3 className="text-lg font-semibold text-slate-900 dark:text-white">{section.title}</h3>
+                </div>
 
-{/* Footer */}
-<footer className="bg-gray-900 dark:bg-gray-950 text-white py-8 border-t border-gray-800">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-      <p className="text-gray-400 text-sm">
-        &copy; {new Date().getFullYear()} Pratik Adhikari. All rights reserved.
-      </p>
-      <div className="flex items-center gap-6">
-        <a href="#about" className="text-gray-400 hover:text-white text-sm transition-colors">About</a>
-        <a href="#projects" className="text-gray-400 hover:text-white text-sm transition-colors">Projects</a>
-        <a href="#contact" className="text-gray-400 hover:text-white text-sm transition-colors">Contact</a>
-      </div>
-    </div>
-  </div>
-</footer>
+                <ul className="space-y-4 text-sm leading-7 text-slate-600 dark:text-slate-300">
+                  {section.content.map((item) => (
+                    <li key={typeof item === 'string' ? item : item.heading}>
+                      {typeof item === 'string' ? (
+                        <span>{item}</span>
+                      ) : (
+                        <div>
+                          <p className="font-medium text-slate-800 dark:text-slate-100">{item.heading}</p>
+                          <p className="text-xs uppercase tracking-[0.12em] text-slate-500 dark:text-slate-400">{item.dates}</p>
+                          <p className="mt-1">{item.text}</p>
+                        </div>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
+        <section id="contact" className="border-t border-slate-200 bg-slate-50 py-20 dark:border-slate-800 dark:bg-slate-900/70">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate={isVisible.contact ? "visible" : "hidden"}
+              className="mb-10 text-center"
+            >
+              <p className="mb-2 text-sm font-semibold uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">Contact</p>
+              <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">Get In Touch</h2>
+            </motion.div>
+
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              animate={isVisible.contact ? "visible" : "hidden"}
+              className="grid gap-6 lg:grid-cols-3"
+            >
+              <a href="mailto:adhikaripratik2003@gmail.com" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-blue-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-950">
+                <div className="mb-4 inline-flex rounded-xl bg-blue-100 p-3 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Mail className="h-5 w-5" /></div>
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">Email</p>
+                <p className="mt-2 text-base font-medium text-slate-800 dark:text-slate-200">adhikaripratik2003@gmail.com</p>
+              </a>
+
+              <a href="tel:+9779824163232" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-blue-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-950">
+                <div className="mb-4 inline-flex rounded-xl bg-blue-100 p-3 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Phone className="h-5 w-5" /></div>
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">Phone</p>
+                <p className="mt-2 text-base font-medium text-slate-800 dark:text-slate-200">+977-9824163232</p>
+              </a>
+
+              <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-700 dark:bg-slate-950">
+                <div className="mb-4 inline-flex rounded-xl bg-blue-100 p-3 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><MapPin className="h-5 w-5" /></div>
+                <p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">Location</p>
+                <p className="mt-2 text-base font-medium text-slate-800 dark:text-slate-200">Lalitpur, Nepal</p>
+              </div>
+            </motion.div>
+
+            <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+              <a href="https://www.linkedin.com/in/pratik-adhikari-54b8b6202/" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-400 hover:text-blue-600 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:text-blue-400">
+                <Linkedin className="h-4 w-4" /> LinkedIn
+              </a>
+              <a href="https://github.com/pra7ik7" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white">
+                <Github className="h-4 w-4" /> GitHub
+              </a>
+              <a href="#top" className="inline-flex items-center gap-2 rounded-full bg-blue-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-blue-700">
+                Back to top <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer className="border-t border-slate-200 bg-slate-900 py-8 text-slate-300 dark:border-slate-700">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-sm sm:px-6 lg:flex-row lg:px-8">
+          <p>&copy; {new Date().getFullYear()} Pratik Adhikari. All rights reserved.</p>
+          <div className="flex items-center gap-5">
+            <a href="#about" className="transition hover:text-white">About</a>
+            <a href="#experience" className="transition hover:text-white">Experience</a>
+            <a href="#contact" className="transition hover:text-white">Contact</a>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
