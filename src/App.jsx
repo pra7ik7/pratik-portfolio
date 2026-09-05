@@ -62,11 +62,17 @@ const skillCategories = [
 ];
 
 const researchInterests = [
-  "Renewable energy integration",
-  "Power system modeling and dynamics",
-  "Distribution systems",
-  "Power system monitoring",
-  "Data-driven grid modernization",
+  "Renewable-energy integration",
+  "Power-electronic conversion & control",
+  "Grid-connected converters & predictive control",
+  "Distributed energy resources",
+  "Distribution-system monitoring & state estimation",
+  "Power-system monitoring",
+  "Digital twins",
+  "Data-driven forecasting & uncertainty quantification",
+  "Low-cost sensing & sensor calibration",
+  "Microgrids & energy access",
+  "Grid modernization",
 ];
 
 const honors = [
@@ -333,7 +339,7 @@ const App = () => {
                 Pratik Adhikari
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-                Electrical engineering graduate of IOE, Pulchowk Campus, working on renewable energy integration, power system modeling and dynamics, distribution systems, power system monitoring, and data-driven grid modernization.
+                Electrical engineering graduate of IOE, Pulchowk Campus, working on power converters, renewable-energy integration, power-system monitoring, digital twins, and data-driven techniques for grid modernization.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-300">
@@ -343,7 +349,7 @@ const App = () => {
               </div>
 
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="mailto:adhikaripratik2003@gmail.com" className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700">
+                <a href="mailto:078bel069.pratik@pcampus.edu.np" className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-blue-700">
                   <Mail className="h-4 w-4" /> Email Me
                 </a>
                 <a href="Pratik_Adhikari_CV.pdf" download="Pratik_Adhikari_CV.pdf" className="inline-flex items-center gap-2 rounded-lg border border-blue-200 bg-blue-50 px-5 py-3 text-sm font-medium text-blue-700 transition hover:bg-blue-100 dark:border-blue-800 dark:bg-blue-900/20 dark:text-blue-300 dark:hover:bg-blue-900/30">
@@ -415,22 +421,22 @@ const App = () => {
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
                   <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Cpu className="h-5 w-5" /></div>
                   <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Research Focus</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Renewable energy integration, power system modeling and dynamics, and data-driven grid modernization.</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Power converters, renewable-energy integration, power-system monitoring, digital twins, and data-driven techniques for grid modernization.</p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
                   <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Settings className="h-5 w-5" /></div>
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Technical Profile</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">MATLAB/Simulink, power electronics, instrumentation and sensor calibration, and control design.</p>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Power Electronics & Sensing</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Power-electronic conversion and control for renewable-energy systems, plus low-cost sensing and sensor calibration for energy-system measurement.</p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
                   <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Network className="h-5 w-5" /></div>
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Systems Thinking</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Distribution systems, grid-connected converters, power quality, and power system monitoring.</p>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Grid, DER & Resilience</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Distributed energy resources, distribution-system monitoring and state estimation, and resilient operation of high-renewable power systems.</p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
                   <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><BrainCircuit className="h-5 w-5" /></div>
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Data-Driven mindset</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Time-series forecasting and machine learning applied to renewable generation and system operation.</p>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Energy Analytics</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Data-driven modeling, forecasting, and uncertainty quantification for renewable generation and power-system operation.</p>
                 </div>
               </motion.div>
             </div>
@@ -727,11 +733,10 @@ const App = () => {
               animate={isVisible.contact ? "visible" : "hidden"}
               className="grid gap-6 lg:grid-cols-3"
             >
-              <a href="mailto:adhikaripratik2003@gmail.com" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-blue-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-950">
+              <a href="mailto:078bel069.pratik@pcampus.edu.np" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-blue-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-950">
                 <div className="mb-4 inline-flex rounded-xl bg-blue-100 p-3 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Mail className="h-5 w-5" /></div>
                 <p className="text-xs font-semibold uppercase tracking-[0.15em] text-slate-500 dark:text-slate-400">Email</p>
-                <p className="mt-2 break-all text-base font-medium text-slate-800 dark:text-slate-200">adhikaripratik2003@gmail.com</p>
-                <p className="mt-1 break-all text-sm text-slate-500 dark:text-slate-400">078bel069.pratik@pcampus.edu.np</p>
+                <p className="mt-2 break-all text-base font-medium text-slate-800 dark:text-slate-200">078bel069.pratik@pcampus.edu.np</p>
               </a>
 
               <a href="tel:+9779824163232" className="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition hover:border-blue-300 hover:shadow-md dark:border-slate-700 dark:bg-slate-950">
