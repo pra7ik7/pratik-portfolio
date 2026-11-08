@@ -32,52 +32,55 @@ const skillCategories = [
   {
     title: "Modelling & Simulation",
     icon: <CircuitBoard className="w-6 h-6" />,
-    skills: ["MATLAB/Simulink", "COMSOL Multiphysics", "Proteus"],
+    skills: ["MATLAB/Simulink (Simscape Electrical)", "DIgSILENT PowerFactory (coursework)", "COMSOL Multiphysics", "Proteus"],
   },
   {
-    title: "Programming",
+    title: "Research Methods",
+    icon: <BrainCircuit className="w-6 h-6" />,
+    skills: ["Predictive current control", "SVPWM", "LCL filter design & damping", "Harmonic analysis (IEC 61000-4-7, IEEE 519)", "MPPT", "Time-series forecasting (SARIMA)", "Model verification"],
+  },
+  {
+    title: "Programming & Data",
     icon: <Code className="w-6 h-6" />,
-    skills: ["Python", "MATLAB", "C/C++", "JavaScript"],
+    skills: ["Python (NumPy, SciPy, pandas, statsmodels, scikit-learn, Matplotlib)", "MATLAB", "C/C++", "JavaScript"],
   },
   {
-    title: "Power Systems & Electrical Design",
-    icon: <Zap className="w-6 h-6" />,
-    skills: ["DIgSILENT PowerFactory (coursework)", "AutoCAD"],
-  },
-  {
-    title: "Data & Machine Learning",
-    icon: <TrendingUp className="w-6 h-6" />,
-    skills: ["NumPy", "Pandas", "scikit-learn", "statsmodels", "Matplotlib"],
-  },
-  {
-    title: "Instrumentation & Embedded Systems",
+    title: "Hardware & Instrumentation",
     icon: <Cpu className="w-6 h-6" />,
-    skills: ["Arduino", "Sensor calibration", "Serial data acquisition"],
+    skills: ["Arduino", "Sensor calibration", "Serial data acquisition", "PCB design"],
   },
   {
-    title: "Other",
+    title: "Electrical Design",
+    icon: <Zap className="w-6 h-6" />,
+    skills: ["AutoCAD", "Bluebeam Revu", "Load calculations", "Single-line diagrams"],
+  },
+  {
+    title: "Tools",
     icon: <Settings className="w-6 h-6" />,
-    skills: ["LaTeX", "Git", "Bluebeam Revu", "PCB design"],
+    skills: ["LaTeX", "Git"],
   },
 ];
 
 const researchInterests = [
+  "Power electronics & control",
   "Renewable-energy integration",
-  "Power-electronic conversion & control",
-  "Grid-connected converters & predictive control",
-  "Distributed energy resources",
-  "Distribution-system monitoring & state estimation",
-  "Power-system monitoring",
+  "Grid-connected converters",
+  "Power-system modeling & dynamics",
+  "Distribution systems",
   "Digital twins",
-  "Data-driven forecasting & uncertainty quantification",
-  "Low-cost sensing & sensor calibration",
-  "Microgrids & energy access",
-  "Grid modernization",
+  "Data-driven monitoring & forecasting",
+];
+
+const highlights = [
+  { value: "84.72%", label: "B.E. aggregate, Distinction" },
+  { value: "3rd", label: "in graduating EE cohort" },
+  { value: "IELTS 8.0", label: "Academic, Nov 2026" },
+  { value: "2", label: "research projects" },
 ];
 
 const honors = [
   "Ranked 3rd in the graduating Electrical Engineering cohort, Institute of Engineering, Tribhuvan University (84.72% aggregate).",
-  "Merit-based undergraduate scholarship, Institute of Engineering — awarded on the national engineering entrance examination (approx. 10,000 candidates), with a separate IOE Scholarship Stipend for all eight semesters.",
+  "Merit Scholarship, Institute of Engineering, Tribhuvan University (Apr 2022 – Aug 2026) — awarded on the national engineering entrance examination (approx. 10,000 candidates); also received the IOE Scholarship Stipend for all eight semesters.",
 ];
 
 const education = [
@@ -88,8 +91,8 @@ const education = [
     dates: "Apr 2022 – Aug 2026",
     details: [
       "Aggregate: 84.72% — Distinction (institutional scale; 80% distinction threshold).",
-      "Final-year project: Digital Twin for Real-Time Monitoring and Short-Term Forecasting of a Grid-Connected Photovoltaic System; supervisor: Asst. Prof. Deependra Neupane.",
-      "Coursework: Power System Analysis I & II, Power Electronics, Engineering Mathematics, Control Systems, Switchgear & Protection, Instrumentation I & II, Utilization of Electrical Energy.",
+      "Final-year project (B.E. thesis): Development of a Digital Twin for Real-Time Monitoring and Short-Term Forecasting of a Photovoltaic System. Supervisors: Dr. Basanta Kumar Gautam (Pulchowk Campus) and Er. Deependra Neupane (Electricity Regulatory Commission).",
+      "Coursework: Power System Analysis I & II, Power Electronics, Control Systems, Digital Control System, Applied Photovoltaic Engineering, Switchgear & Protection, Instrumentation I & II, Engineering Mathematics.",
     ],
   },
   {
@@ -103,77 +106,87 @@ const education = [
 
 const researchExperience = [
   {
-    title: "Digital Twin for Real-Time Monitoring & Short-Term Forecasting of a Grid-Connected PV System",
-    institution: "Final-year project (four-member team), Department of Electrical Engineering, Pulchowk Campus; supervisor: Asst. Prof. Deependra Neupane",
-    dates: "2025 – 2026",
+    title: "Digital Twin for Real-Time Monitoring and Short-Term Forecasting of a Grid-Connected PV System",
+    institution: "Final-year project (four-member team), Department of Electrical Engineering, Pulchowk Campus. Supervisors: Dr. Basanta Kumar Gautam and Er. Deependra Neupane",
+    dates: "Sep 2025 – Present",
     points: [
-      "Built and parameterised a MATLAB/Simulink model of a 335 W grid-connected PV system and evaluated it against 41 paired measurements collected on site over two days, obtaining 34.76 W RMSE (24.1% nRMSE, r = 0.918) when driven by on-site irradiance against 114.23 W RMSE (r = 0.703) when driven by satellite-derived irradiance, quantifying the benefit of site-specific measurement.",
-      "Designed and calibrated a low-cost Arduino/LDR irradiance sensor against a co-located smartphone-based reference (power-law fit, R² = 0.974, n = 21), and used it with temperature sensing to drive the model from live serial input, demonstrating continuous sensor-to-simulation operation.",
-      "Developed a SARIMA(1,1,1)×(1,1,1)₂₄ pipeline for day-ahead irradiance and temperature forecasting (R² = 0.921 and 0.964) and propagated the forecasts through the model, predicting next-day PV energy within 0.5% of the value obtained under measured driving conditions.",
-      "Analysed irradiance-dependent residuals, attributing low-irradiance underprediction to sensor floor limitations and high-irradiance overprediction to unmodelled thermal and loss effects, and documented both as targets for instrument and model refinement.",
-      "Methods and tools: MATLAB, Simulink, Arduino, Python, SARIMA time-series modelling, sensor calibration.",
+      "Built a converter-level MATLAB/Simulink twin of a 335 W grid-connected PV module (single-diode model, DC–DC stage with perturb-and-observe MPPT, single-phase inverter) and validated it against 41 field measurements on a clear and a partly cloudy day.",
+      "Verified MPPT operation against the module's own P–V curve (99.9–100% tracking efficiency, 200–1000 W/m²). Against the 41 field readings the twin gives 24.2 W RMSE (r = 0.969) with on-site irradiance and 99.8 W (r = 0.69) with satellite-derived irradiance, showing the value of site-specific sensing. On the clear day, measured power was 87.6% of the twin's prediction, indicative of unmodelled losses.",
+      "Designed and calibrated a low-cost Arduino/LDR irradiance sensor against a smartphone-based reference (power-law fit, R² = 0.974, n = 21) and used it to drive the twin from live serial data in a real-time demonstration.",
+      "Developed a SARIMA(1,1,1)×(1,1,1)₂₄ day-ahead forecaster for irradiance and temperature and propagated it through the twin: on a held-out day, daily energy was within 0.8% of that obtained with measured weather, against 6.7% for a persistence baseline.",
+    ],
+    tags: ["MATLAB/Simulink", "MPPT", "Arduino", "SARIMA", "Sensor calibration"],
+    links: [{ label: "Code & data on GitHub", href: "https://github.com/pra7ik7/pv-digital-twin-forecasting" }],
+    images: [
+      { src: "img/mppt_verification.png", alt: "MPPT tracking verification of the PV digital twin", caption: "MPPT tracking against the module's P–V curve" },
+      { src: "img/field_validation.png", alt: "Measured and simulated PV power on two field days", caption: "Measured vs simulated power, two field days" },
+      { src: "img/day_ahead_forecast.png", alt: "SARIMA day-ahead forecast of irradiance and twin power", caption: "Day-ahead irradiance and power forecast" },
     ],
   },
   {
-    title: "Deadbeat Predictive Current Control with SVPWM and LCL Filtering for Grid-Connected Voltage-Source Converters",
-    institution: "Ongoing research study, Department of Electrical Engineering, Pulchowk Campus",
-    dates: "2026 – Present",
+    title: "Deadbeat Predictive Current Control and Passive Damping of an LCL-Filtered Grid-Connected Converter",
+    institution: "Simulation study with Panas Bhattarai (Dept. of Electrical Engineering, Tribhuvan University), who provided guidance; I lead the modeling, simulation, analysis and writing",
+    dates: "May 2026 – Present",
     points: [
-      "Studying deadbeat predictive current control with space-vector PWM for a three-phase grid-connected VSC: discrete-time dq-frame modelling, fixed-frequency 10 kHz modulation, and capacitor-current-feedback active damping of an LCL grid interface.",
-      "Developing MATLAB/Simulink simulations of a 5 kW, 400 V, 50 Hz system comparing L and LCL filtering through resonance, harmonic-spectrum, and P–Q dynamic-response analyses; preliminary results indicate markedly lower current THD for the deadbeat-SVPWM with LCL active-damping configuration at matched average switching frequency.",
-      "Examining LCL resonance, digital-delay effects on active damping, and controller de-tuning as practical limits on closed-loop stability; the study is currently being extended toward a revised control formulation.",
+      "Developed a stationary αβ-frame deadbeat predictive current controller for a 4.1 kW, 380 V two-level voltage-source converter with an LCL filter (2.478 kHz resonance): power commands map algebraically to current references, needing no Park transformation or synchronous-frame regulator. Simulated with 10 kHz SVPWM and one control period of computation delay.",
+      "Determined how much passive damping the controller needs: the undamped converter does not operate (voltage limiter active at every step, power flow reverses), no deadbeat gain from 0.05 to 1 restores operation, and the minimum damping ratio lies between 0.034 and 0.057.",
+      "Identified a damping range of 21–30 Ω per delta branch that operates under ±20% L₁, L₂, C tolerance and up to 5 mH added grid inductance, which the 10 Ω minimum does not. Worst harmonic-limit utilisation is 0.34–0.23 (IEC 61000-4-7 subgroups against IEEE 519-2022) at 0.15–0.21% dissipation, about 14 times the fundamental-frequency estimate.",
+      "Earlier study (5 kW, 400 V, no computation delay): 60 Ω per branch removed 91.8% of the resonance-band current; subgroup TDD 3.0–4.9% across six operating points (at most 5.1% over ten robustness cases). Preceded by FCS-MPC and L versus LCL comparisons.",
     ],
+    tags: ["Deadbeat control", "SVPWM", "LCL filter", "IEEE 519", "Simulation only"],
+    links: [],
+    images: [],
   },
 ];
 
 const professionalExperience = [
   {
-    title: "Electrical Engineer (Remote, MEP)",
-    institution: "DeltaQ Engineering — US-based MEP engineering consultancy",
+    title: "Electrical Engineer (Remote)",
+    institution: "DeltaQ Engineering — US-based mechanical, electrical and plumbing (MEP) consultancy",
     dates: "May 2026 – Present",
     points: [
-      "Perform electrical load calculations and system analysis for residential, multi-family, commercial, and industrial projects, documenting in accordance with applicable US codes and standards.",
-      "Produce technical single-line diagrams, specifications, and coordination layouts in AutoCAD, and evaluate electrical equipment selections against project and code requirements.",
+      "Perform electrical load calculations and system analysis for residential, multi-family, commercial and industrial projects in accordance with applicable US codes and standards.",
+      "Prepare AutoCAD single-line diagrams, specifications and coordination layouts; check equipment selections.",
     ],
   },
 ];
 
 const academicProjects = [
   {
-    title: "Power Plant Design",
+    title: "16 MW Run-of-River Hydropower Plant Design",
     dates: "2026",
     tag: "Academic",
-    description: "Designed a 16 MW run-of-river hydropower plant end-to-end: site selection, hydrological analysis, turbine selection, generator/transformer specification, neutral grounding, station supply, diesel-generator backup, and battery-bank sizing.",
+    description: "Hydrology, turbine, generator and transformer selection, grounding, station supply, backup sizing.",
   },
   {
-    title: "Transmission & Distribution System Design",
+    title: "132 kV Double-Circuit Transmission Line Design",
     dates: "2026",
     tag: "Academic",
-    description: "Designed a 132 kV, double-circuit transmission line for a 108 MW, 220 km corridor including voltage-level selection, tower geometry, insulation design, and conductor evaluations.",
+    description: "108 MW over 220 km: voltage level, tower geometry, insulation design, conductor evaluation.",
   },
   {
-    title: "Industrial Power Distribution & Illumination",
+    title: "Commercial Building Power Distribution & Illumination",
     dates: "2025",
     tag: "Academic",
-    description: "Designed the electrical distribution system for a multi-storey commercial building in AutoCAD — lighting/power-socket layouts, SDB/FDB/MDB sizing, cable selection, protective-device coordination, and 250 kVA transformer / 330 A MCCB selection.",
+    description: "AutoCAD layouts, board/cable sizing, protection coordination, 250 kVA transformer, 330 A MCCB.",
   },
   {
     title: "Smart Fertigation System",
     dates: "2023",
     tag: "Prototype",
-    description: "Built an Arduino-based monitoring and control system (DHT-11, soil moisture sensors) automating irrigation with prototype fertilisation control.",
+    description: "Arduino irrigation control (DHT-11, soil-moisture sensors) with prototype fertilisation control.",
   },
 ];
 
 const extras = [
   {
-    title: "Teaching, Mentoring & Outreach",
+    title: "Outreach",
     icon: <BookOpen className="w-5 h-5" />,
     content: [
       {
         heading: "BloomED — STEM Content Creator (Volunteer)",
         dates: "Jun 2021 – Jan 2022",
-        text: "Produced simplified learning material explaining technical and scientific concepts for underprivileged students, developing science-communication and teaching skills.",
+        text: "Wrote simplified science and technology learning material for under-resourced students.",
       },
     ],
   },
@@ -187,11 +200,22 @@ const extras = [
     ],
   },
   {
+    title: "Test Scores",
+    icon: <GraduationCap className="w-5 h-5" />,
+    content: [
+      {
+        heading: "IELTS Academic — Overall 8.0",
+        dates: "1 Nov 2026",
+        text: "Listening 9.0, Reading 9.0, Writing 7.0, Speaking 7.0.",
+      },
+    ],
+  },
+  {
     title: "Languages",
     icon: <Users className="w-5 h-5" />,
     content: [
       "Nepali (native)",
-      "English (professional working proficiency)",
+      "English (fluent)",
       "Hindi (conversational)",
     ],
   },
@@ -201,7 +225,7 @@ const navItems = [
   { label: "About", href: "#about" },
   { label: "Education", href: "#education" },
   { label: "Honors", href: "#honors" },
-  { label: "Experience", href: "#experience" },
+  { label: "Research", href: "#experience" },
   { label: "Projects", href: "#projects" },
   { label: "Skills", href: "#skills" },
   { label: "Contact", href: "#contact" },
@@ -333,13 +357,13 @@ const App = () => {
               transition={{ duration: 0.5 }}
             >
               <p className="mb-3 text-sm font-medium uppercase tracking-[0.2em] text-blue-600 dark:text-blue-400">
-                Electrical Engineer
+                Electrical Engineer · Prospective PhD Applicant
               </p>
               <h1 className="text-4xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white md:text-5xl">
                 Pratik Adhikari
               </h1>
               <p className="mt-5 max-w-2xl text-lg leading-8 text-slate-600 dark:text-slate-300">
-                Electrical engineering graduate of IOE, Pulchowk Campus, working on power converters, renewable-energy integration, power-system monitoring, digital twins, and data-driven techniques for grid modernization.
+                Electrical engineering graduate of IOE, Pulchowk Campus. My research interests are power-electronic converters and control for renewable-energy integration, power-system modeling, and digital twins and data-driven monitoring and forecasting of power systems.
               </p>
 
               <div className="mt-8 flex flex-wrap gap-4 text-sm text-slate-600 dark:text-slate-300">
@@ -361,6 +385,15 @@ const App = () => {
                 <a href="https://github.com/pra7ik7" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-5 py-3 text-sm font-medium text-slate-700 transition hover:border-slate-400 hover:text-slate-900 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-slate-500 dark:hover:text-white">
                   <Github className="h-4 w-4" /> GitHub
                 </a>
+              </div>
+
+              <div className="mt-10 grid max-w-2xl grid-cols-2 gap-4 sm:grid-cols-4">
+                {highlights.map((item) => (
+                  <div key={item.label} className="rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm dark:border-slate-700 dark:bg-slate-900">
+                    <p className="text-xl font-bold text-blue-600 dark:text-blue-400">{item.value}</p>
+                    <p className="mt-1 text-xs leading-5 text-slate-500 dark:text-slate-400">{item.label}</p>
+                  </div>
+                ))}
               </div>
             </motion.div>
 
@@ -398,10 +431,10 @@ const App = () => {
                 className="space-y-5 text-base leading-8 text-slate-600 dark:text-slate-300"
               >
                 <p>
-                  I am an electrical engineer with a strong foundation in renewable-energy systems, power electronics, control systems, and simulation-driven analysis. I completed my BE in Electrical Engineering at IOE, Pulchowk Campus in August 2026 with an 84.72% aggregate, ranking 3rd in my graduating cohort, and I currently work as a remote MEP electrical engineer with DeltaQ Engineering.
+                  I completed my B.E. in Electrical Engineering at IOE, Pulchowk Campus in August 2026 with an 84.72% aggregate (Distinction), ranking 3rd in my graduating cohort. I am preparing to apply to PhD programs, with interests in power electronics and control for renewable-energy integration, power-system modeling and dynamics, and digital twins and data-driven monitoring of power systems.
                 </p>
                 <p>
-                  Through research and project work, I have developed hands-on experience in MATLAB/Simulink modelling, PV system digital twins, low-cost instrumentation and sensor calibration, and time-series forecasting. I enjoy solving complex engineering problems through rigorous analysis, collaborative work, and evidence-based design.
+                  My research so far has two parts: a MATLAB/Simulink digital twin of a grid-connected PV system, validated with field data and coupled to a low-cost Arduino irradiance sensor and a SARIMA day-ahead forecaster (final-year project); and a simulation study of deadbeat predictive current control and passive damping for an LCL-filtered grid-connected converter. Alongside, I work remotely as an electrical engineer for a US MEP consultancy.
                 </p>
                 <div className="flex flex-wrap gap-2 pt-2">
                   {researchInterests.map((interest) => (
@@ -421,22 +454,22 @@ const App = () => {
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
                   <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Cpu className="h-5 w-5" /></div>
                   <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Research Focus</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Power converters, renewable-energy integration, power-system monitoring, digital twins, and data-driven techniques for grid modernization.</p>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Power electronics and control for renewable-energy integration, power-system modeling and dynamics, and digital twins for monitoring and forecasting.</p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
                   <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Settings className="h-5 w-5" /></div>
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Power Electronics & Sensing</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Power-electronic conversion and control for renewable-energy systems, plus low-cost sensing and sensor calibration for energy-system measurement.</p>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Power Electronics & Control</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Predictive current control, SVPWM and LCL-filter damping for grid-connected converters, studied in MATLAB/Simulink.</p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
                   <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><Network className="h-5 w-5" /></div>
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Grid, DER & Resilience</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Distributed energy resources, distribution-system monitoring and state estimation, and resilient operation of high-renewable power systems.</p>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Grid & Distribution Systems</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Power-system modeling and dynamics, and the operation of distribution systems with a growing share of inverter-based resources.</p>
                 </div>
                 <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-700 dark:bg-slate-950">
                   <div className="mb-3 inline-flex rounded-xl bg-blue-100 p-2 text-blue-600 dark:bg-blue-900/40 dark:text-blue-400"><BrainCircuit className="h-5 w-5" /></div>
-                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Energy Analytics</h3>
-                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">Data-driven modeling, forecasting, and uncertainty quantification for renewable generation and power-system operation.</p>
+                  <h3 className="text-sm font-semibold text-slate-900 dark:text-white">Digital Twins & Forecasting</h3>
+                  <p className="mt-2 text-sm leading-6 text-slate-600 dark:text-slate-300">A PV digital twin with low-cost sensing and SARIMA day-ahead forecasting, verified against field measurements.</p>
                 </div>
               </motion.div>
             </div>
@@ -561,6 +594,35 @@ const App = () => {
                       </li>
                     ))}
                   </ul>
+
+                  {item.tags && (
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {item.tags.map((tag) => (
+                        <span key={tag} className="rounded-full border border-blue-200 bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:border-blue-800 dark:bg-blue-900/30 dark:text-blue-300">{tag}</span>
+                      ))}
+                    </div>
+                  )}
+
+                  {item.images && item.images.length > 0 && (
+                    <div className="mt-6 grid gap-4 md:grid-cols-3">
+                      {item.images.map((img) => (
+                        <figure key={img.src} className="overflow-hidden rounded-xl border border-slate-200 bg-white dark:border-slate-700">
+                          <img src={img.src} alt={img.alt} loading="lazy" className="w-full bg-white object-contain" />
+                          <figcaption className="px-3 py-2 text-xs text-slate-500 dark:bg-slate-900 dark:text-slate-400">{img.caption}</figcaption>
+                        </figure>
+                      ))}
+                    </div>
+                  )}
+
+                  {item.links && item.links.length > 0 && (
+                    <div className="mt-6 flex flex-wrap gap-3">
+                      {item.links.map((link) => (
+                        <a key={link.href} href={link.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 transition hover:border-blue-500 hover:text-blue-600 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:border-blue-400 dark:hover:text-blue-400">
+                          <Github className="h-4 w-4" /> {link.label}
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </motion.article>
               ))}
 
@@ -681,7 +743,7 @@ const App = () => {
             <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-white md:text-4xl">Development & Engagement</h2>
           </motion.div>
 
-          <div className="grid gap-6 lg:grid-cols-3">
+          <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-4">
             {extras.map((section) => (
               <motion.div
                 key={section.title}

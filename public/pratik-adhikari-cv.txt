@@ -1,61 +1,60 @@
 %=====================================================================
+%  PRATIK ADHIKARI -- ACADEMIC CV (US graduate admissions, Fall 2027)
+%  PhD-inquiry version, 8 Nov 2026 (content re-verified against sources).
 %
-%  MAINTENANCE NOTES
+%  RULES THIS CV FOLLOWS
+%   - Aggregate, coursework and high school are KEPT on purpose.
+%   - "Research Experience" comes straight after Education; PV digital
+%     twin first, then the converter-control study.
+%   - Numbers were checked against the source files:
+%       PV twin:   Project_material/07_Conference_Paper/analysis/
+%                  results_final.json, 06_Corrected_Model/README.md,
+%                  01_Original_Final_Report/Project Report.pdf
+%       Converter: Panas Dai/final_drafts/undamped_study/manuscript/base
+%                  (delay-aware damping study) and
+%                  final_drafts/manuscript_final_v2.txt (earlier 5 kW study)
+%       Degree:    Pratik_Adhikari_Transcripts.pdf, IELTS TRF.
+%   - No manuscripts section until author lists and venues are confirmed.
+%   - Keep to TWO pages with room left at the end of page 2 for a
+%     References section (see the commented block at the end).
 %
-%  1. Keep this to TWO pages. If it spills to three, cut Teaching /
-%     Outreach first, then trim Academic Projects -- never Research.
-%
-%  2. Verify every numerical result and technical claim before sending.
-%
-%  3. Per-professor tailoring: usually edit only the Research Interests
-%     block. Make other changes only when they materially improve
-%     evidence of research fit.
-%
-%  4. Do not use terms such as "closed-loop", "field measurements",
-%     "real-time", "validated", or "publication" unless they are
-%     technically and factually defensible.
-%
-%  5. Export filename:
-%     Pratik_Adhikari_CV.pdf
-%
+%  PER-PROFESSOR TAILORING: edit only the Research Interests line.
+%  Alternatives are kept below it.
 %=====================================================================
 
 \documentclass[11pt,a4paper]{article}
 
-% -------------------- PACKAGES --------------------
-\usepackage[margin=0.9in]{geometry}
+\usepackage[margin=0.8in,top=0.55in,bottom=0.65in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+\usepackage{lmodern}
 \usepackage[protrusion=true,expansion=false]{microtype}
 \usepackage{enumitem}
 \usepackage{titlesec}
 \usepackage{xcolor}
-\definecolor{accent}{RGB}{30,90,160}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
-\usepackage[hidelinks]{hyperref}
 \usepackage{fontawesome5}
+\usepackage[hidelinks]{hyperref}
 
+\definecolor{linkblue}{HTML}{1F4E9A}
 \hypersetup{
-  pdftitle={Pratik Adhikari --- Curriculum Vitae},
+  pdftitle={Pratik Adhikari -- Curriculum Vitae},
   pdfauthor={Pratik Adhikari},
   pdfsubject={Academic CV, Electrical Engineering},
-  pdfkeywords={power systems, renewable energy integration, digital twin,
-               photovoltaic, forecasting, grid modernization}
+  pdfkeywords={power electronics, grid-connected converters, predictive
+               control, digital twin, photovoltaic, renewable integration}
 }
+\newcommand{\link}[2]{\href{#1}{\textcolor{linkblue}{#2}}}
 
-% -------------------- FORMATTING --------------------
 \setlength{\parindent}{0pt}
 \setlist[itemize]{noitemsep, topsep=2pt, leftmargin=1.4em}
+\setlist[enumerate]{noitemsep, topsep=2pt, leftmargin=1.8em}
 \widowpenalty=10000
 \clubpenalty=10000
 
-\titleformat{\section}
-  {\large\bfseries}
-  {}
-  {0pt}
-  {}[\titlerule]
-\titlespacing*{\section}{0pt}{10pt}{4pt}
+\titleformat{\section}{\large\bfseries}{}{0pt}{}[\titlerule]
+\titlespacing*{\section}{0pt}{6pt}{3pt}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -63,319 +62,219 @@
 \fancyfoot[L]{\footnotesize Pratik Adhikari --- Curriculum Vitae}
 \fancyfoot[R]{\footnotesize Page \thepage\ of \pageref{LastPage}}
 
+% \entry{bold title}{dates}   \subentry{plain text}{right text}
 \newcommand{\entry}[2]{%
-  \begin{minipage}[t]{0.76\textwidth}\raggedright\textbf{#1}\end{minipage}%
+  \begin{minipage}[t]{0.77\textwidth}\raggedright\textbf{#1}\end{minipage}%
   \hfill%
-  \begin{minipage}[t]{0.23\textwidth}\raggedleft #2\end{minipage}\par}
-\newcommand{\subentry}[2]{%
-  \begin{minipage}[t]{0.76\textwidth}\raggedright #1\end{minipage}%
-  \hfill%
-  \begin{minipage}[t]{0.23\textwidth}\raggedleft #2\end{minipage}\par}
+  \begin{minipage}[t]{0.22\textwidth}\raggedleft #2\end{minipage}\par}
+\newcommand{\role}[1]{\vspace{1pt}{\itshape #1}\par}
 
-% -------------------- DOCUMENT --------------------
 \begin{document}
 
-% -------------------- HEADER --------------------
+%============================== HEADER ===============================
 \begin{center}
-    {\LARGE \textbf{Pratik Adhikari}}\\[5pt]
-    {\small
-    \faEnvelope\ 
-    \textcolor{accent}{\href{mailto:078bel069.pratik@pcampus.edu.np}{078bel069.pratik@pcampus.edu.np}}
-    \enspace|\enspace
-    \faPhone\ 
-    \textcolor{accent}{\href{tel:+9779824163232}{+977-9824163232}}
-    \enspace|\enspace
-    \faLinkedin\ 
-    \textcolor{accent}{\href{https://www.linkedin.com/in/pratik-adhikari17/}{LinkedIn}}
-    \enspace|\enspace
-    \faGithub\ 
-    \textcolor{accent}{\href{https://github.com/pra7ik7}{GitHub}}
-    \enspace|\enspace
-    \faGlobe\ 
-    \textcolor{accent}{\href{https://www.pratikadhikari17.com.np/}{Portfolio}}
-    }
+  {\LARGE\bfseries Pratik Adhikari}\\[5pt]
+  Lalitpur, Nepal
+  \quad\textbar\quad
+  \faEnvelope\ \link{mailto:078bel069.pratik@pcampus.edu.np}{078bel069.pratik@pcampus.edu.np}
+  \quad\textbar\quad
+  \faPhone\ \link{tel:+9779824163232}{+977-9824163232}\\[3pt]
+  \faLinkedin\ \link{https://www.linkedin.com/in/pratik-adhikari17/}{linkedin.com/in/pratik-adhikari17}
+  \quad\textbar\quad
+  \faGithub\ \link{https://github.com/pra7ik7}{github.com/pra7ik7}
+  \quad\textbar\quad
+  \faGlobe\ \link{https://www.pratikadhikari17.com.np/}{pratikadhikari17.com.np}
 \end{center}
 
-%=====================================================================
-%  RESEARCH INTERESTS
-%=====================================================================
-
+%========================= RESEARCH INTERESTS ========================
 \section{Research Interests}
 
-% ================================================================
-% EDIT ONLY THIS ONE LINE FOR EACH PROFESSOR
-% ================================================================
+Power electronics and control for renewable-energy integration, power-system
+modeling and dynamics, distribution systems, and digital twins and data-driven
+monitoring and forecasting of power systems.
 
-Renewable Energy Integration, Power System Modeling and Dynamics, Distribution Systems, Power System Monitoring, and Data-Driven Grid Modernization
-% [GENERAL / POWER SYSTEMS]
-% Renewable-energy integration, power-system monitoring, digital twins,
-% and data-driven forecasting for grid modernization.
-
-% % [GRID / DER / RESILIENCE]
-% Distributed energy resources, distribution-system monitoring and state
-% estimation, and resilient operation of high-renewable power systems.
-
-% % [POWER ELECTRONICS / CONTROL]
-% Power-electronic conversion and control for renewable-energy systems,
-% including grid-connected converters, predictive control, and
+% [POWER ELECTRONICS / CONTROL]
+% Power-electronic conversion and control for renewable-energy systems:
+% grid-connected converters, predictive control, LCL filtering and
 % converter-dominated grid dynamics.
+%
+% [DISTRIBUTION / DER / RESILIENCE]
+% Distributed energy resources, dynamics and monitoring of
+% inverter-dominated distribution systems, and resilient operation of
+% high-renewable power systems.
+%
+% [CPS / DATA-DRIVEN]
+% Cyber-physical and data-driven methods for inverter-based resources:
+% digital twins, model verification, forecasting, and low-cost sensing.
 
-% % [ML / ENERGY ANALYTICS]
-% Data-driven modeling, forecasting, and uncertainty quantification for
-% renewable generation and power-system operation.
-
-% % [SENSING / INSTRUMENTATION / CPS]
-% Low-cost sensing, sensor calibration, and cyber-physical measurement
-% systems for monitoring and control of energy systems.
-
-% % [MICROGRIDS / ENERGY ACCESS]
-% Microgrid planning and operation, renewable-energy integration, and
-% hydro--solar complementarity in developing power systems.
-%=====================================================================
-%  EDUCATION
-%=====================================================================
-
+%============================= EDUCATION =============================
 \section{Education}
 
-\entry{Institute of Engineering, Pulchowk Campus}{Apr 2022 -- Aug 2026}
-
-Bachelor of Engineering (BE), Electrical Engineering ---
-Tribhuvan University, Lalitpur, Nepal
-
+\entry{Institute of Engineering, Pulchowk Campus, Tribhuvan University}{Apr 2022 -- Aug 2026}
+Bachelor of Engineering in Electrical Engineering \hfill Lalitpur, Nepal
 \begin{itemize}
-    \item \textbf{Aggregate: 84.72\%} --- Distinction
-    (institutional scale; 80\% distinction threshold).
-    
-    % \item \textbf{Class Rank: Top 5 / 384} in the graduating
-    % Electrical Engineering cohort.
-    
-    \item Final-year project:
-    \textit{Digital Twin for Real-Time Monitoring and Short-Term
-    Forecasting of a Grid-Connected Photovoltaic System};
-    Supervisor: Asst. Prof.\ Deependra Neupane.
-    
-    \item Coursework: Power System Analysis I \& II, Power Electronics, Engineering Mathematics,
-    Control Systems, Switchgear \& Protection, Instrumentation I \& II,
-    Utilization of Electrical Energy.
+  \item \textbf{Aggregate: 84.72\%} --- Distinction (institutional
+  scale; 80\% distinction threshold).
+  \item Final-year project (B.E.\ thesis): \textit{Development of a
+  Digital Twin for Real-Time Monitoring and Short-Term Forecasting of a
+  Photovoltaic System}.
+  \item Coursework: Power System Analysis I \& II, Power Electronics,
+  Control Systems, Digital Control System, Applied Photovoltaic
+  Engineering, Switchgear \& Protection, Instrumentation I \& II,
+  Engineering Mathematics.
 \end{itemize}
 
 \vspace{4pt}
-
-\entry{SOS Hermann Gmeiner Secondary School Gandaki}{2019 -- 2021}
-
+\entry{SOS Hermann Gmeiner Secondary School, Gandaki}{2019 -- 2021}
 Higher Secondary (Grade 11--12), Science --- GPA: 3.64 / 4.00
-%=====================================================================
-%  HONORS & AWARDS
-%=====================================================================
 
-\section{Honors \& Awards}
-
-\begin{itemize}
-\item \textbf{Ranked 3rd} in the graduating Electrical Engineering
-cohort, Institute of Engineering, Tribhuvan University (84.72\%
-aggregate).
-
-\item \textbf{Merit-based undergraduate scholarship}, Institute of
-Engineering --- awarded on the national engineering entrance
-examination (approx.\ 10,000 candidates) and received a separate \textbf{IOE Scholarship Stipend} for all
-eight semesters.
-
-\end{itemize}
-
-%=====================================================================
-%  TECHNICAL SKILLS
-%=====================================================================
-
-\section{Technical Skills}
-\textbf{Modeling \& Simulation:}
-MATLAB/Simulink, COMSOL Multiphysics, Proteus 
-
-
-\textbf{Programming:} Python, MATLAB, C/C++, Javascript 
-
-\textbf{Power Systems \& Electrical Design:}
-DIgSILENT PowerFactory (coursework), AutoCAD 
-
-\textbf{Data \& Machine Learning:}
-NumPy, Pandas, scikit-learn, statsmodels, Matplotlib 
-
-\textbf{Instrumentation \& Embedded Systems:}
-Arduino, sensor calibration, serial data acquisition 
-
-\textbf{Other:}
-LaTeX, Git, Bluebeam Revu, PCB design
-%=====================================================================
-%  RESEARCH EXPERIENCE
-%=====================================================================
-
+%========================= RESEARCH EXPERIENCE =======================
 \section{Research Experience}
-\entry{Digital Twin for Real-Time Monitoring \& Short-Term Forecasting
-of a Grid-Connected PV System}{2025 -- 2026}
 
-\textit{Final-year project (four-member team), Department of Electrical
-Engineering, Pulchowk Campus; Supervisor: Asst. Prof.\ Deependra Neupane}
-
+\entry{Digital Twin for Real-Time Monitoring and Short-Term Forecasting
+of a Grid-Connected PV System}{Sep 2025 -- Present}
+\role{Final-year project (four-member team), Department of Electrical
+Engineering, Pulchowk Campus. Supervisors: Dr.\ Basanta Kumar Gautam (Pulchowk Campus) and
+Er.\ Deependra Neupane (Electricity Regulatory Commission).}
 \begin{itemize}
-
-    \item Built and parameterised a MATLAB/Simulink model of a 335~W
-    grid-connected PV system and evaluated it against 41 paired
-    measurements collected on site over two days, obtaining 34.76~W
-    RMSE (24.1\% nRMSE, $r = 0.918$) when driven by on-site irradiance
-    against 114.23~W RMSE ($r = 0.703$) when driven by satellite-derived
-    irradiance, quantifying the benefit of site-specific measurement.
-
-    \item Designed and calibrated a low-cost Arduino/LDR irradiance
-    sensor against a co-located smartphone-based reference
-    (power-law fit, $R^2 = 0.974$, $n = 21$), and used it with
-    temperature sensing to drive the model from live serial input,
-    demonstrating continuous sensor-to-simulation operation.
-
-    \item Developed a SARIMA$(1,1,1)\times(1,1,1)_{24}$ pipeline for
-    day-ahead irradiance and temperature forecasting ($R^2 = 0.921$ and
-    $0.964$) and propagated the forecasts through the model, predicting
-    next-day PV energy within 0.5\% of the value obtained under measured
-    driving conditions.
-
-    \item Analysed irradiance-dependent residuals, attributing
-    low-irradiance underprediction to sensor floor limitations and
-    high-irradiance overprediction to unmodelled thermal and loss
-    effects, and documented both as targets for instrument and model
-    refinement.
-
+  \item Built a converter-level MATLAB/Simulink twin of a 335~W
+  grid-connected PV module (single-diode model, DC--DC stage with
+  perturb-and-observe MPPT, single-phase inverter) and validated it
+  against 41 field measurements on a clear and a partly cloudy day.
+  \item Verified MPPT operation against the module's own P--V curve
+  (99.9--100\% tracking efficiency, 200--1000~W/m$^2$). Against the 41
+  field readings the twin gives 24.2~W RMSE ($r = 0.969$) with on-site
+  irradiance and 99.8~W ($r = 0.69$) with satellite-derived irradiance,
+  showing the value of site-specific sensing. On the clear day, measured
+  power was 87.6\% of the twin's prediction, indicative of unmodelled
+  losses.
+  \item Designed and calibrated a low-cost Arduino/LDR irradiance sensor
+  against a smartphone-based reference (power-law fit, $R^2 = 0.974$,
+  $n = 21$) and used it to drive the twin from live serial data in a
+  real-time demonstration.
+  \item Developed a SARIMA$(1,1,1)\times(1,1,1)_{24}$ day-ahead forecaster
+  for irradiance and temperature and propagated it through the twin: on a
+  held-out day, daily energy was within 0.8\% of that obtained with
+  measured weather, against 6.7\% for a persistence baseline.
 \end{itemize}
 
-\entry{Deadbeat Predictive Current Control with SVPWM and LCL Filtering
-for Grid-Connected Voltage-Source Converters}{2026 -- Present}
-
-\textit{Ongoing research study, Department of Electrical Engineering,
-Pulchowk Campus}
-
+\vspace{3pt}
+\entry{Deadbeat Predictive Current Control and Passive Damping of an
+LCL-Filtered Grid-Connected Converter}{May 2026 -- Present}
+\role{Simulation study with Panas Bhattarai (Dept.\ of Electrical
+Engineering, Tribhuvan University), who provided guidance; I lead the
+modeling, simulation, analysis and writing.}
 \begin{itemize}
-    \item Studying deadbeat predictive current control with space-vector
-    PWM for a three-phase grid-connected VSC: discrete-time $dq$-frame
-    modelling, fixed-frequency 10~kHz modulation, and
-    capacitor-current-feedback active damping of an LCL grid interface.
-
-    \item Developing MATLAB/Simulink simulations of a 5~kW, 400~V, 50~Hz
-    system comparing L and LCL filtering through resonance,
-    harmonic-spectrum, and $P$--$Q$ dynamic-response analyses;
-    preliminary results indicate markedly lower current THD for the
-    deadbeat-SVPWM with LCL active-damping configuration at matched
-    average switching frequency.
-
-    \item Examining LCL resonance, digital-delay effects on active
-    damping, and controller de-tuning as practical limits on
-    closed-loop stability; the study is currently being extended toward
-    a revised control formulation.
+  \item Developed a stationary $\alpha\beta$-frame deadbeat predictive
+  current controller for a 4.1~kW, 380~V two-level voltage-source
+  converter with an LCL filter (2.478~kHz resonance): power commands map
+  algebraically to current references, needing no Park transformation or
+  synchronous-frame regulator. Simulated with 10~kHz SVPWM and one control
+  period of computation delay.
+  \item Determined how much passive damping the controller needs: the
+  undamped converter does not operate (voltage limiter active at every
+  step, power flow reverses), no deadbeat gain from 0.05 to 1 restores
+  operation, and the minimum damping ratio lies between 0.034 and 0.057.
+  \item Identified a damping range of 21--30~$\Omega$ per delta branch
+  that operates under $\pm$20\% $L_1$, $L_2$, $C$ tolerance and up to
+  5~mH added grid inductance, which the 10~$\Omega$ minimum does not.
+  Worst harmonic-limit utilisation is 0.34--0.23 (IEC~61000-4-7 subgroups
+  against IEEE~519-2022) at 0.15--0.21\% dissipation, about 14 times the
+  fundamental-frequency estimate.
+  \item Earlier study (5~kW, 400~V, no computation delay): 60~$\Omega$
+  per branch removed 91.8\% of the resonance-band current; subgroup TDD
+  3.0--4.9\% across six operating points (at most 5.1\% over ten
+  robustness cases). Preceded by FCS-MPC and L versus LCL comparisons.
 \end{itemize}
 
-
-%=====================================================================
-%  PUBLICATIONS  --  uncomment when you have a submission.
-%=====================================================================
-% \section{Publications \& Conference Papers}
-% \begin{enumerate}[leftmargin=1.6em]
-%     \item P.~Adhikari, [Co-authors], and [Advisor], ``Digital Twin for Real-Time Monitoring and Short-Term Forecasting of a Grid-Connected Photovoltaic System,'' \textit{Proceedings of the 17th IOE Graduate Conference}, Lalitpur, Nepal, 2027. (submitted / under review / accepted)
-% \end{enumerate}
-
-%=====================================================================
-%  PROFESSIONAL EXPERIENCE
-%=====================================================================
-
+%======================= PROFESSIONAL EXPERIENCE =====================
 \section{Professional Experience}
 
-\entry{DeltaQ Engineering --- Electrical Engineer (Remote, MEP)}
-{May 2026 -- Present}
-
-\textit{US-based MEP engineering consultancy}
-
+\entry{DeltaQ Engineering --- Electrical Engineer (Remote)}{May 2026 -- Present}
+\role{US-based mechanical, electrical and plumbing (MEP) consultancy}
 \begin{itemize}
-    \item Perform electrical load calculations and system analysis for
-    residential, multi-family, commercial, and industrial projects,
-    documenting in accordance with applicable US
-    codes and standards.
-
-    \item Produce technical single-line diagrams, specifications, and
-    coordination layouts in AutoCAD, and evaluate electrical equipment
-    selections against project and code requirements.
-\end{itemize}
-%=====================================================================
-%  ACADEMIC PROJECTS
-%=====================================================================
-\section{Academic Projects}
-
-\vspace{4pt}
-\entry{Power Plant Design}{2026}
-\begin{itemize}
-    \item Designed a 16~MW run-of-river hydropower plant end-to-end: site selection, hydrological analysis, turbine selection, generator/transformer specification, neutral grounding, station supply, diesel-generator backup, and battery-bank sizing.
+  \item Perform electrical load calculations and system analysis for
+  residential, multi-family, commercial and industrial projects in
+  accordance with applicable US codes and standards.
+  \item Prepare AutoCAD single-line diagrams, specifications and
+  coordination layouts; check equipment selections.
 \end{itemize}
 
-\entry{Industrial Power Distribution \& Illumination}{2025} % <<< TODO: verify year
+%========================= HONORS & AWARDS ===========================
+\section{Honors \& Awards}
+\entry{Ranked 3rd in the graduating Electrical Engineering cohort}{Aug 2026}
+\vspace{5pt}
+\entry{Merit Scholarship, Institute of Engineering, Tribhuvan University}{Apr 2022 -- Aug 2026}
 \begin{itemize}
-    \item Designed the electrical distribution system for a multi-storey commercial building in AutoCAD---lighting/power-socket layouts, SDB/FDB/MDB sizing, cable selection, protective-device coordination, and 250~kVA transformer/330~A MCCB selection.
+  \item Awarded on the national engineering entrance exam
+  (approx.\ 10,000 candidates); IOE stipend, all eight semesters.
 \end{itemize}
 
-\entry{Transmission \& Distribution System Design}{2026} % <<< TODO: verify year
-\begin{itemize}
-    \item Designed a 132~kV, double-circuit transmission line for a 108~MW, 220~km corridor including voltage-level selection, tower geometry, insulation design, and conductor evaluations.
-\end{itemize}
+%==================== ENGINEERING DESIGN PROJECTS ====================
+\section{Engineering Design Projects (Undergraduate)}
 
-%=====================================================================
-%  TECHNICAL PROJECTS
-%=====================================================================
+\entry{16 MW Run-of-River Hydropower Plant Design}{2026}
+\vspace{-2pt}
+\begin{itemize}
+  \item Hydrology, turbine, generator and transformer selection, grounding,
+  station supply, backup sizing.
+\end{itemize}
+\entry{132 kV Double-Circuit Transmission Line Design}{2026}
+\vspace{-2pt}
+\begin{itemize}
+  \item 108~MW over 220~km: voltage level, tower geometry, insulation
+  design, conductor evaluation.
+\end{itemize}
+\entry{Commercial Building Power Distribution \& Illumination}{2025}
+\vspace{-2pt}
+\begin{itemize}
+  \item AutoCAD layouts, board/cable sizing, protection coordination,
+  250~kVA transformer, 330~A MCCB.
+\end{itemize}
 \entry{Smart Fertigation System}{2023}
+\vspace{-2pt}
 \begin{itemize}
-    \item Built an Arduino-based monitoring and control system (DHT-11, soil moisture sensors) automating irrigation with prototype fertilisation control.
+  \item Arduino irrigation control (DHT-11, soil-moisture sensors) with
+  prototype fertilisation control.
 \end{itemize}
 
-%=====================================================================
-%  TEACHING, MENTORING & OUTREACH
-%=====================================================================
-\section{Teaching, Mentoring \& Outreach}
+%========================= TECHNICAL SKILLS ==========================
+\section{Technical Skills}
+{\raggedright\hyphenpenalty=10000
+\textbf{Simulation:} MATLAB/Simulink (Simscape Electrical), DIgSILENT
+PowerFactory (coursework), COMSOL Multiphysics, Proteus\\
+\textbf{Methods:} predictive current control, SVPWM, LCL filter design
+and damping, harmonic analysis (IEC~61000-4-7, IEEE~519), MPPT, time-series
+forecasting (SARIMA), model verification\\
+\textbf{Programming \& data:} Python (NumPy, SciPy, pandas, statsmodels,
+scikit-learn, Matplotlib), MATLAB, C/C++, JavaScript\\
+\textbf{Hardware:} Arduino, sensor calibration, serial data
+acquisition, PCB design\\
+\textbf{Tools:} \LaTeX, Git, AutoCAD, Bluebeam Revu\par}
 
+%===================== TEACHING & OUTREACH ===========================
+\section{Outreach}
 \entry{BloomED --- STEM Content Creator (Volunteer)}{Jun 2021 -- Jan 2022}
+\vspace{-2pt}
 \begin{itemize}
-    \item Produced simplified learning material explaining technical and scientific concepts for underprivileged students, developing science-communication and teaching skills.
+  \item Wrote simplified science and technology learning material for
+  under-resourced students.
 \end{itemize}
-% <<< HIGH VALUE: any tutoring, lab demonstrating, or student-club
-%     workshops you have led belong here.
 
-% Professional Development (MOOCs) removed to keep within two pages.
-% Restore if space opens up after cutting elsewhere:
-% Supervised Machine Learning (DeepLearning.AI/Stanford, Coursera);
-% Supervised Learning with scikit-learn (DataCamp);
-% AutoCAD Electrical Essentials (SourceCAD).
+%============================ TEST SCORES ============================
+\section{Test Scores}
+\textbf{IELTS Academic} (1 Nov 2026): Overall \textbf{8.0} (Listening 9.0,
+Reading 9.0, Writing 7.0, Speaking 7.0)
+% GRE: add "GRE: Q [ ], V [ ], AW [ ] (Mon YYYY)" when a score exists.
 
-%=====================================================================
-%  TEST SCORES  --  uncomment the moment you have a score report.
-%=====================================================================
-% \section{Test Scores}
-% \begin{itemize}
-%     \item IELTS Academic: Overall [X.X] (Listening [X.X], Reading [X.X], Writing [X.X], Speaking [X.X]) --- [Month Year]
-%     \item GRE General: Quantitative [XXX] ([XX] percentile), Verbal [XXX] ([XX] percentile), Analytical Writing [X.X] --- [Month Year]
-% \end{itemize}
-
-%=====================================================================
-%  MEMBERSHIPS
-%=====================================================================
-% \section{Professional Memberships}
-% Student Member, IEEE and IEEE Power \& Energy Society (PES), [Year]--present.
-
-%=====================================================================
-%  LANGUAGES
-%=====================================================================
+%============================ LANGUAGES ==============================
 \section{Languages}
-Nepali (native); English (professional working proficiency); Hindi (conversational)
+Nepali (native), English (fluent), Hindi (conversational)
 
-%=====================================================================
-%  REFERENCES
-%=====================================================================
+%==================== RESERVED FOR REFERENCES ========================
+% About four lines are left free below on purpose. To add references,
+% uncomment (and check that the CV stays on two pages):
 % \section{References}
-% \textbf{[Prof. Full Name]}, [Title], Department of Electrical Engineering, Pulchowk Campus, IOE, Tribhuvan University --- [email] \\
-% \textit{Undergraduate thesis advisor} \\[4pt]
-% \textbf{[Prof. Full Name]}, [Title], [Department, Institution] --- [email] \\
-% \textit{[Course / capacity in which they know your work]} \\[4pt]
-% \textbf{[Name]}, [Title], DeltaQ Engineering --- [email] \\
-% \textit{Current supervisor}
+% Name, title, institution, email (x3)
 
 \end{document}
