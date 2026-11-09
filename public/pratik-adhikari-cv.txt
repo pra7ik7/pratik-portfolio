@@ -1,4 +1,4 @@
-%=====================================================================
+﻿%=====================================================================
 %  PRATIK ADHIKARI -- ACADEMIC CV (US graduate admissions, Fall 2027)
 %  PhD-inquiry version, 8 Nov 2026 (content re-verified against sources).
 %
@@ -132,7 +132,7 @@ Higher Secondary (Grade 11--12), Science --- GPA: 3.64 / 4.00
 \section{Research Experience}
 
 \entry{Digital Twin for Real-Time Monitoring and Short-Term Forecasting
-of a Grid-Connected PV System}{Sep 2025 -- Present}
+of a Grid-Connected PV System}{Sep 2025 -- May 2026}
 \role{Final-year project (four-member team), Department of Electrical
 Engineering, Pulchowk Campus. Supervisors: Dr.\ Basanta Kumar Gautam (Pulchowk Campus) and
 Er.\ Deependra Neupane (Electricity Regulatory Commission).}

@@ -108,7 +108,7 @@ const researchExperience = [
   {
     title: "Digital Twin for Real-Time Monitoring and Short-Term Forecasting of a Grid-Connected PV System",
     institution: "Final-year project (four-member team), Department of Electrical Engineering, Pulchowk Campus. Supervisors: Dr. Basanta Kumar Gautam and Er. Deependra Neupane",
-    dates: "Sep 2025 – Present",
+    dates: "Sep 2025 – May 2026",
     points: [
       "Built a converter-level MATLAB/Simulink twin of a 335 W grid-connected PV module (single-diode model, DC–DC stage with perturb-and-observe MPPT, single-phase inverter) and validated it against 41 field measurements on a clear and a partly cloudy day.",
       "Verified MPPT operation against the module's own P–V curve (99.9–100% tracking efficiency, 200–1000 W/m²). Against the 41 field readings the twin gives 24.2 W RMSE (r = 0.969) with on-site irradiance and 99.8 W (r = 0.69) with satellite-derived irradiance, showing the value of site-specific sensing. On the clear day, measured power was 87.6% of the twin's prediction, indicative of unmodelled losses.",
